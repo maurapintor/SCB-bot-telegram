@@ -17,9 +17,13 @@ Smart Car Box (SCB) repository. Made by pizza-team, a group of students from Uni
 
 ### Hardware setup
 
+### Arduino sketch for accelerometer
+
 ### Arduino sketch for GPS
 
 ### Setup WiFi connectivity (hotspot)
+
+### Sending coordinates to cloud
 
 ### Telegram bot setup
 
