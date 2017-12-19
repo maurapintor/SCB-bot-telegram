@@ -28,7 +28,7 @@ Summarizing the principal functionalities:
 
 #### g-Select
 The g-Select feature allows for the selection between two
-sensitivities. Depending on the logic input placed on pin 10,
+sensitivities. Depending on the logic input placed on pin GSEL,
 the device internal gain will be changed allowing it to function
 with a 1.5g or 6g sensitivity.
 
