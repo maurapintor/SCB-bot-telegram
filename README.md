@@ -22,7 +22,8 @@ First of all connect the accelemeter (MMA7361) as showed following:
 
 immagine connectionship
 
-For more information on MMA7361 click [here](https://www.nxp.com/docs/en/data-sheet/MMA7361L.pdf)
+For more information on MMA7361 click [here](https://www.nxp.com/docs/en/data-sheet/MMA7361L.pdf).
+
 Resuming the principal functionalities:
 
 #### g-Select
