@@ -35,7 +35,7 @@ with a 1.5g or 6g sensitivity.
 | g-Select        | g-Range           | Sensitivity  |
 | ----------------|:-----------------:| ------------:|
 |       0         |       1.5g        | 800 mV/g     |
-|       1         |        6          | 206 mV/g     |
+|       1         |        6g         | 206 mV/g     |
 
 #### Sleep Mode
 The 3 axis accelerometer provides a Sleep Mode that is
