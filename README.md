@@ -24,7 +24,7 @@ immagine connectionship
 
 For more information on MMA7361 click [here](https://www.nxp.com/docs/en/data-sheet/MMA7361L.pdf).
 
-Resuming the principal functionalities:
+Summarizing the principal functionalities:
 
 #### g-Select
 The g-Select feature allows for the selection between two
