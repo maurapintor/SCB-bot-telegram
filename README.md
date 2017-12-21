@@ -58,7 +58,7 @@ USIAMO SERVIZI CLOUD
 #### Google cloud platform
 Now we have to create a project in the [Google Cloud Platform](https://cloud.google.com). You can create a Google account or use your own. First step is to create a project, following this [link](https://console.cloud.google.com). 
 
-Inline-style: 
+Create a project: 
 ![alt text](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/Schermata%202017-12-21%20alle%2018.21.21.png "Create Project")
 IMAGE
 
