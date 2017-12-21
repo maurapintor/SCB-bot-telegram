@@ -71,5 +71,8 @@ IMAGE
 
 
 ### Telegram bot setup
+Well let's create a Telegram Bot, it's very simple if you follow the official documentation [here](https://core.telegram.org/bots)
+
+Now follow this [tutorial](https://github.com/python-telegram-bot/python-telegram-bot) to install Telegram bot library, in order to manage the bot behavior and send command to Arduino board
 
 ### Adding Telegram bot functionalities in the Arduino Sketch
