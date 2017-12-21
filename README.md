@@ -58,6 +58,8 @@ USIAMO SERVIZI CLOUD
 #### Google cloud platform
 Now we have to create a project in the [Google Cloud Platform](https://cloud.google.com). You can create a Google account or use your own. First step is to create a project, following this [link](https://console.cloud.google.com). 
 
+Inline-style: 
+![alt text](https://drive.google.com/open?id=1XpMfyL-WS0ciBbPdfrY-XnO1eNiyMnmC "Logo Title Text 1")
 IMAGE
 
 
