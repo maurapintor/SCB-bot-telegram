@@ -7,8 +7,9 @@ import paho.mqtt.client as mqtt
 
 class SmartCarBoxBot(object):
 
-    my_topic = "scb/control"
+
     def __init__(self, bot_token):
+        self.my_topic = "scb/control"
         self.bot_token = bot_token
         self.broker = "broker.hivemq.com"
         self.port = 1883
@@ -65,7 +66,7 @@ class SmartCarBoxBot(object):
 
     def publish(self, message):
         self.client1.connect(self.broker, self.port)  # establish connection
-        self.client1.publish(my_topic, message)  # publish
+        self.client1.publish(self.my_topic, message)  # publish
 
 if __name__ == '__main__':
     bot_token = '502810340:AAEQKZAkwwhvA0B6Fkk5rTvlY_ERWp1Nd5k'
