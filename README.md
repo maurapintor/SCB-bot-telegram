@@ -59,7 +59,11 @@ USIAMO SERVIZI CLOUD
 Now we have to create a project in the [Google Cloud Platform](https://cloud.google.com). You can create a Google account or use your own. First step is to create a project, following this [link](https://console.cloud.google.com). 
 
 Create a project: 
-![alt text](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/Schermata%202017-12-21%20alle%2018.21.21.png "Create Project")
+![alt text](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/images/create_project.png "Create Project")
+
+Create app engine application, simply open the gcloud shell in the App Engine menu:
+![alt text](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/images/app_engine.png "Create Project")
+
 IMAGE
 
 
