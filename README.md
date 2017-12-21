@@ -45,9 +45,24 @@ reduction of operating current
 
 ### Arduino sketch for GPS
 
+For GPS setup and testing we used [this tutorial](http://www.ayomaonline.com/iot/gy-gps6mv2-neo6mv2-neo-6m-gps-module-with-arduino-usb-ttl/). This just reads the GPS output data. Those data are very hard to read, so we used the parsing library [Tiny GPS](https://github.com/mikalhart/TinyGPS). From this library we took the example sketch "test_with_gps_device" and modified the behavior in order to obtain the time-stamp and the coordinates. Finally, we are ready to send the coordinates to the Google Cloud Datastore.
+
 ### Setup WiFi connectivity (hotspot)
 
+
+
 ### Sending coordinates to cloud
+
+USIAMO SERVIZI CLOUD
+
+#### Google cloud platform
+Now we have to create a project in the [Google Cloud Platform](https://cloud.google.com). You can create a Google account or use your own. First step is to create a project, following this [link](https://console.cloud.google.com). 
+
+IMAGE
+
+
+
+
 
 ### Telegram bot setup
 
