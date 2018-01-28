@@ -7,7 +7,6 @@ import paho.mqtt.client as mqtt
 
 class SmartCarBoxBot(object):
 
-
     def __init__(self, bot_token):
         self.my_topic = "scb/control"
         self.bot_token = bot_token
