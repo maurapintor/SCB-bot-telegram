@@ -8,7 +8,9 @@ import datetime as dt
 import logging
 
 from utils.Trip import check_trip
+from utils.telegramMsg import sendLocation, sendMsg
 
+chat_id = -195433658
 
 class PositionHandler(webapp2.RequestHandler):
     def post(self):
@@ -25,8 +27,10 @@ class PositionHandler(webapp2.RequestHandler):
 
         api_key = 'prova'
         if api_key == 'prova':
+
             sense_data = SensedData().query().order(
                 -SensedData.updated_at).fetch()
+
             if len(sense_data) is 0:
                 trip_id = 0
                 self.put_data(latitude, longitude, speed, updated_at,trip_id)
@@ -34,12 +38,13 @@ class PositionHandler(webapp2.RequestHandler):
                 print (sense_data[0].updated_at)
                 last_sample = sense_data[0]
                 trip_id = sense_data[0].trip_id
-
                 #"%02d-%02d-%02d_%02d:%02d:%02d", month, day, year, hour, minute, second
                 is_new_trip = check_trip(last_sample, updated_at)
 
                 if is_new_trip:
                     trip_id += 1
+                    sendMsg(chat_id,"Attenzione il tuo veicolo si sta muovendo!")
+                    sendLocation(chat_id,latitude,longitude)
 
                 self.put_data(latitude, longitude, speed, updated_at,trip_id)
 
