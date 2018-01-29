@@ -15,7 +15,7 @@ from google.appengine.ext import ndb
 import webapp2
 from google.appengine.ext.webapp import template
 
-from handlers import PositionHandler
+from handlers.PositionHandler import PositionHandler
 
 TOKEN = '502810340:AAEQKZAkwwhvA0B6Fkk5rTvlY_ERWp1Nd5k'
 
@@ -136,6 +136,7 @@ class WebhookHandler(webapp2.RequestHandler):
 
                     #mqtt request
                     #datastore write
+
                     result = 200
 
                     if result == 200:
@@ -180,5 +181,5 @@ app = webapp2.WSGIApplication([
     ('/updates', GetUpdatesHandler),
     ('/set_webhook', SetWebhookHandler),
     ('/webhook', WebhookHandler),
-    ('/putPosition', PositionHandler),
+    ('/position/put', PositionHandler),
 ], debug=True)
