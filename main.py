@@ -13,6 +13,7 @@ import datetime
 from google.appengine.api import urlfetch
 from google.appengine.ext import ndb
 import webapp2
+from google.appengine.ext.webapp import template
 
 from handlers import PositionHandler
 
@@ -45,9 +46,16 @@ def getEnabled(chat_id):
 # ================================
 
 
+class MainHandler(webapp2.RequestHandler):
+    def get(self):
+        template_values = "ciao"
+        self.response.out.write(template.render("templates/home.html", template_values))
+
 
 class MeHandler(webapp2.RequestHandler):
     def get(self):
+        template_values = "ciao"
+        self.response.out.write(template.render("templates/home.html", template_values))
         urlfetch.set_default_fetch_deadline(60)
         #commento foo
         self.response.write(json.dumps(json.load(urllib2.urlopen(BASE_URL + 'getMe'))))
@@ -158,12 +166,16 @@ class WebhookHandler(webapp2.RequestHandler):
             else:
                 logging.info('not enabled for chat_id {}'.format(chat_id))
 
-
-
+class MapHandler(webapp2.RequestHandler):
+    def get(self):
+        template_values = "ciao"
+        self.response.out.write(template.render("templates/mappa.html", template_values))
 
 
 app = webapp2.WSGIApplication([
-
+    ('/', MainHandler),
+    ('/position', PositionHandler),
+    ('/map', MapHandler),
     ('/me', MeHandler),
     ('/updates', GetUpdatesHandler),
     ('/set_webhook', SetWebhookHandler),

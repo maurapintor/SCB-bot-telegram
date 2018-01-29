@@ -1,0 +1,21 @@
+{% extends 'home.html' %}
+{% block content %}
+
+    <head>
+        <style>
+            #map {
+                height: 450px;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid" style="padding: 5%; padding-top: 0; padding-bottom: 5%; margin: 0">
+            <h4 style="margin-top: 0">L'ultimo utilizzo del sistema è stato: {{ data_utilizzo }} </h4>
+            <div id="map"></div>
+        </div>
+    </body>
+
+{% endblock %}
+
+
