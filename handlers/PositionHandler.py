@@ -13,14 +13,20 @@ from utils.Trip import check_trip
 class PositionHandler(webapp2.RequestHandler):
     def post(self):
 
-        key = self.request.get('apiKey')
+        api_key = self.request.get('apiKey')
+        timestamp = self.request.get('data')
 
-        if key == 'prova':
+        logging.warning("PositionHandler, key: {}".format(api_key))
+        logging.warning("PositionHandler, timestamp: {}".format(timestamp))
+
+        api_key = 'prova'
+        if api_key == 'prova':
 
 
-            timestamp = self.request.get('timestamp')
-            updated_to = dt.datetime.strptime(timestamp,"%m/%d/%Y %H:%M:%S")
-            #is_new_trip = check_trip()
+            # "%02d-%02d-%02d_%02d:%02d:%02d", month, day, year, hour, minute, second
+
+            updated_at = dt.datetime.strptime(timestamp,"%m-%d-%Y_%H:%M:%S")
+            is_new_trip = check_trip(updated_at)
 
             latitude = self.request.get('latitude')
             longitude = self.request.get('longitutde')
@@ -30,20 +36,21 @@ class PositionHandler(webapp2.RequestHandler):
             sense_data.latitude = latitude
             sense_data.longitude = longitude
             sense_data.speed = speed
-            sense_data.updated_to = updated_to
+            sense_data.updated_at = updated_at
 
             logging.warning(
                 "PositionHandler, latitude: {}, longitude: {}, speed: {}".
                     format(latitude,
                            longitude,
                            speed,
-                           updated_to))
+                           updated_at))
 
             sense_data.put()
             self.response.status_int = 200
             resp = json.dumps(
                 {"Position update status": "ok"})
             self.response.write(resp)
+
         else:
             logging.warning(
                 "PositionHandler, post() method. Not allowed with this key.")
