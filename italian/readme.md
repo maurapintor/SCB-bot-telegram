@@ -53,7 +53,6 @@ Il team ha apportato le seguenti modifiche al funzionamento:
 * images :      immagini per il tutorial
 * italian :     cartella del readme in italiano
 * models :      gestione datastore (tabelle)
-* telegram :    bot telegram
 * templates :   visualizzazione della mappa
 * utils :       classi di utilità
 * README.md :   readme del repository (inglese)
@@ -105,9 +104,6 @@ Le ultime due connessioni sono consigliate per la gestione dei cavi. In seguito 
 | RX GPS --> D4 NodeMCU (GPIO2)                   |
 | TX GPS --> D2 NodeMCU (GPIO4)                   |
 | GND GPS --> GND                                 |
-| 3V3 accelerometro --> 5V                        |
-| GND accelerometro --> GND                       |
-| gSEL accelerometro --> GND                      |
 
 Il GPS ha anche bisogno di un'antenna. Per questo caso specifico si consiglia di usare una External Active Antenna come [questa](https://www.adafruit.com/product/960).
 
@@ -116,8 +112,26 @@ Il GPS ha anche bisogno di un'antenna. Per questo caso specifico si consiglia di
 #### WiFi e parametri da personalizzare
 
 
-
 #### Cloud services
+
+
+USIAMO SERVIZI CLOUD
+
+#### Google cloud platform
+
+Per l'hosting del bot e del database dobbiamo utilizzare servizi Cloud. Abbiamo scelto di usare [Google Cloud Platform](https://cloud.google.com) (GCP). Per proseguire nel tutorial è necessario avere un account Google (per crearne uno seguire questo [link](https://accounts.google.com/SignUp)).
+
+Una volta effettuato l'accesso, è necessario creare un progetto su [GCP console](https://console.cloud.google.com). 
+
+Creazione del progetto: 
+![alt text](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/images/create_project.png "Create Project")
+
+Creazione applicazione App Engine, semplicemente aprendo la shell di gcloud nel menu appengine:
+![alt text](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/images/app_engine.png "Create Project")
+
+IMAGE
+
+
 #### Bot Telegram
 
 
