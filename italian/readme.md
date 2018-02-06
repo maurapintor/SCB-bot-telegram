@@ -65,12 +65,18 @@ Il team ha apportato le seguenti modifiche al funzionamento:
 * acc_gps.ino :         stampa coordinate GPS quando è rilevato un movimento (tramite accelerometro) - solo Arduino
 * motion_detector.ino : sensore di movimento tramite lettura accelerometro (accensione del led come "allarme")
 * nodeAlarmGPS.ino :    stampa coordinate GPS su nodeMCU quando è rilevato un movimento (tramite accelerometro) su Arduino
-* nodePOST_GPS.ino :    post sul datastore delle coordinate lette, funzionamento analogo a "nodeAlarmGPS.ino"
-* post_gps_mqtt.ino :   funzionamento analogo a "nodePOST_GPS.ino", con aggiunta di richiesta coords tramite mqtt
+* nodePOST_GPS.ino :    post su [ThingSpeak](www.thingspeak.com) delle coordinate lette, funzionamento analogo a                                       "nodeAlarmGPS.ino"
+* post_gps_mqtt.ino :   funzionamento analogo a "nodePOST_GPS.ino", con aggiunta di richiesta coords tramite mqtt e post su                           Google Datastore
 
 ## Istruzioni
 
 ### Setup dell'Hardware
+
+Nella seguente sezione sono illustrati i passaggi per il montaggio fisico del sistema. Le connessioni effettuate sono illustrate nello schema seguente. Si consiglia di prenderne visione ed effettuare le connessioni nell'ordine di spiegazione del tutorial.
+
+___
+IMMAGINE
+___
 
 #### Boards
 
@@ -78,7 +84,7 @@ Nel sistema si è scelto di utilizzare un Arduino UNO per gestire il trigger con
 
 | Connessioni                                     |
 |:------------------------------------------------|
-| D7 (GPIO13) NodeMCU --> 10K Ohm --> D2 Arduino  |
+| D7 (GPIO13) NodeMCU --> 10K Ohm --> D4 Arduino  |
 | 3.3V Arduino --> breadboard +                   |
 | GND Arduino --> breadboard -                    |
 
@@ -96,6 +102,12 @@ Le ultime due connessioni sono consigliate per la gestione dei cavi. In seguito 
 | GND accelerometro --> GND                       |
 | gSEL accelerometro --> GND                      |
 
+Aggiungiamo la connessione di un led per verificare l'attivazione del trigger:
+
+| Connessioni                                     |
+|:------------------------------------------------|
+| D2 Arduino --> resistenza 1k Ohm --> led --> GND|
+
 #### GPS
 
 | Connessioni                                     |
@@ -109,13 +121,27 @@ Il GPS ha anche bisogno di un'antenna. Per questo caso specifico si consiglia di
 
 ## Setup del software
 
-#### WiFi e parametri da personalizzare
+Andiamo a preparare gli script necessari su Arduino e NodeMCU:
 
+| Board  | Script         | Link    |
+|:-------|:---------------|:--------|
+| NodeMCU| SCBNode.ino    |[Link]() |
+| Arduino| SCBArduino.ino |[Link]() |
 
-#### Cloud services
+Prima di caricare gli sketch sulla board è importante inserire alcuni parametri per il setup della connettività WiFi e le chiavi per le API.
 
+### WiFi e parametri da personalizzare
 
-USIAMO SERVIZI CLOUD
+Inserire nello script del NodeMCU i seguenti parametri. Fare attenzione alle lettere maiuscole e minuscole, o lo sketch non funzionerà correttamente.
+
+char ssid[]     = "";    // SSID della rete
+char password[] = "";    // password
+
+____
+TODO
+____
+Project_name
+API_Key
 
 #### Google cloud platform
 
@@ -129,9 +155,39 @@ Creazione del progetto:
 Creazione applicazione App Engine, semplicemente aprendo la shell di gcloud nel menu appengine:
 ![alt text](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/images/app_engine.png "Create Project")
 
-IMAGE
-
 
 #### Bot Telegram
+
+Completati i passaggi su GCP, si passa ora a configurare il progetto del bot telegram. Sarà necessario scaricare questo repository e modificare alcuni file di configurazione.
+
+Il primo passo è quello di installare il software development kit (sdk) per Google App Engine e Python. Qui si trova il [tutorial](https://cloud.google.com/appengine/docs/standard/python/download) con i link utili e le istruzioni.
+
+Una volta effettuati i passaggi elencati, si può modificare il file:
+
+|File            |Link                                                                        |
+|----------------|----------------------------------------------------------------------------|
+|app.yaml        |[Link](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/app.yaml) |
+
+_____
+TODO
+_____
+
+
+[Upload gcloud](https://cloud.google.com/appengine/docs/standard/python/getting-started/deploying-the-application)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
