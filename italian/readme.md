@@ -77,18 +77,46 @@ Il team ha apportato le seguenti modifiche al funzionamento:
 
 Nel sistema si è scelto di utilizzare un Arduino UNO per gestire il trigger con accelerometro, e un NodeMCU V3 per la connettività e lettura coordinate GPS. Le due board sono connesse tramite un piedino digitale.
 
-| Connessioni                                   |
-|:----------------------------------------------|
-| D7 (GPIO13) NodeMCU -- 10K Ohm -- D2 Arduino  |
+| Connessioni                                     |
+|:------------------------------------------------|
+| D7 (GPIO13) NodeMCU --> 10K Ohm --> D2 Arduino  |
+| 3.3V Arduino --> breadboard +                   |
+| GND Arduino --> breadboard -                    |
+
+Le ultime due connessioni sono consigliate per la gestione dei cavi. In seguito il + e - della breadboard saranno chiamati 3.3V e GND.
 
 #### Accelerometro
 
+| Connessioni                                     |
+|:------------------------------------------------|
+| Z accelerometro --> A3 Arduino                  |
+| Y accelerometro --> A4 Arduino                  |
+| X accelerometro --> A5 Arduino                  |
+| SL accelerometro --> 3.3V                       |
+| 3V3 accelerometro --> 3V3                       |
+| GND accelerometro --> GND                       |
+| gSEL accelerometro --> GND                      |
 
 #### GPS
 
+| Connessioni                                     |
+|:------------------------------------------------|
+| VCC GPS --> 5V Arduino                          |
+| RX GPS --> D4 NodeMCU (GPIO2)                   |
+| TX GPS --> D2 NodeMCU (GPIO4)                   |
+| GND GPS --> GND                                 |
+| 3V3 accelerometro --> 5V                        |
+| GND accelerometro --> GND                       |
+| gSEL accelerometro --> GND                      |
+
+Il GPS ha anche bisogno di un'antenna. Per questo caso specifico si consiglia di usare una External Active Antenna come [questa](https://www.adafruit.com/product/960).
+
 ## Setup del software
 
-#### WiFi
+#### WiFi e parametri da personalizzare
+
+
+
 #### Cloud services
 #### Bot Telegram
 
