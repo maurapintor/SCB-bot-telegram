@@ -77,7 +77,9 @@ Il team ha apportato le seguenti modifiche al funzionamento:
 
 Nel sistema si è scelto di utilizzare un Arduino UNO per gestire il trigger con accelerometro, e un NodeMCU V3 per la connettività e lettura coordinate GPS. Le due board sono connesse tramite un piedino digitale.
 
-| D7 (GPIO13) NodeMCU -- 10K Ohm -- D2 Arduino |
+| Connessioni                                   |
+|:----------------------------------------------|
+| D7 (GPIO13) NodeMCU -- 10K Ohm -- D2 Arduino  |
 
 #### Accelerometro
 
