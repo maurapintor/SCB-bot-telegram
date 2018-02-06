@@ -1,7 +1,5 @@
 # SCB - Smart Car Box
 
-## Introduzione
-
 In questo readme è presentato il progetto SmartCarBox (SCB) realizzato dal pizza-team, un gruppo di studenti dell'Università di Cagliari. Il progetto fa seguito ai laboratori del Corso di Reti Radiomobili (Corso di Studi di Ing. delle Telecomunicazioni).
 
 Contributori:
@@ -71,11 +69,25 @@ Il team ha apportato le seguenti modifiche al funzionamento:
 * nodePOST_GPS.ino :    post sul datastore delle coordinate lette, funzionamento analogo a "nodeAlarmGPS.ino"
 * post_gps_mqtt.ino :   funzionamento analogo a "nodePOST_GPS.ino", con aggiunta di richiesta coords tramite mqtt
 
-## Istruzioni di funzionamento
-
-
+## Istruzioni
 
 ### Setup dell'Hardware
 
+#### Boards
+
+Nel sistema si è scelto di utilizzare un Arduino UNO per gestire il trigger con accelerometro, e un NodeMCU V3 per la connettività e lettura coordinate GPS. Le due board sono connesse tramite un piedino digitale.
+
+| D7 (GPIO13) NodeMCU -- 10K Ohm -- D2 Arduino |
+
+#### Accelerometro
+
+
+#### GPS
+
+## Setup del software
+
+#### WiFi
+#### Cloud services
+#### Bot Telegram
 
 
