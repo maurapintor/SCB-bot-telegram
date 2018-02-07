@@ -3,6 +3,14 @@
 #include <SoftwareSerial.h>
 #include <TinyGPS.h>
 
+/*
+ *                   ----Made by Pizza-Team----
+ *     This sketch detects movement through an accelerometer connected to Arduino
+ *     and prints to serial monitor of NodeMCU the GPS coordinates when triggered
+ *     (communication through alarmPin)
+ */
+
+
 //---------------------------------------------------------------------------------//
 /*
  *     GPS settings

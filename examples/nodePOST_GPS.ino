@@ -7,11 +7,20 @@
 //---------------------------------------------------------------------------------//
 
 /*
- * Wi-Fi settings
+ *                   ----Made by Pizza-Team----
+ *     This sketch detects movement through an accelerometer connected to Arduino
+ *     and sends to serial monitor of NodeMCU the GPS coordinates when triggered
+ *     (communication through alarmPin). Then it sends the values to ThingSpeak
  */
 
-char ssid[]     = "we<3pizza";    // your network SSID (name)
-char password[] = "pizzateam";    // sqwswzxaqyour network key
+/*
+ * Connection settings
+ */
+
+char ssid[]     = "";    // your network SSID (name)
+char password[] = "";    // sqwswzxaqyour network key
+String apiKey ="";
+
 //---------------------------------------------------------------------------------//
 
 
@@ -39,7 +48,6 @@ int active = LOW;
 int ledPin = LED_BUILTIN;
 //---------------------------------------------------------------------------------//
 
-String apiKey ="ZMJLQ6404L2F2RWE";
 const char* server = "api.thingspeak.com";
 int sent = 0;
 

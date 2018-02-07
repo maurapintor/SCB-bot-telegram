@@ -2,7 +2,11 @@
 #include <SoftwareSerial.h>
 #include <TinyGPS.h>
 
-
+/*
+ *                  ----Made by Pizza-Team----
+ *     This sketch detects movement through an accelerometer
+ *     and prints to serial monitor the GPS coordinates when triggered
+ */
 
 /*
  *     Accelerometer settings
