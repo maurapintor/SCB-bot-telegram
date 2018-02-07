@@ -8,6 +8,7 @@ Contributori:
 * Maurra Pintor
 * Marco Uras
 
+Nota: se vuoi saltare l'introduzione e sai già come funziona il sistema, clicca [qui](#istruzioni).
 
 ## Funzionalità richieste dal progetto
 
