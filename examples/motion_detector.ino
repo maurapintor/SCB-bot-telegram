@@ -1,3 +1,11 @@
+
+
+/*
+ *                   ----Made by Pizza-Team----
+ *     This sketch detects movement through an accelerometer
+ *     and blinks the led when triggered
+ */
+
 /*
 MMA7361 ACCELEROMETER:
   X --> A5

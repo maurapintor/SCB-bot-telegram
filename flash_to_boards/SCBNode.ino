@@ -21,7 +21,7 @@
 */
 
 char ssid[]     = "";    // your network SSID (name)
-char password[] = "";    // sqwswzxaqyour network key
+char password[] = "";    // your network key
 String yourProjectName = "";
 //---------------------------------------------------------------------------------//
 

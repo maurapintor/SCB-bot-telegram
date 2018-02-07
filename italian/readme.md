@@ -8,6 +8,7 @@ Contributori:
 * Maurra Pintor
 * Marco Uras
 
+Nota: se vuoi saltare l'introduzione e sai già come funziona il sistema, clicca [qui](#istruzioni).
 
 ## Funzionalità richieste dal progetto
 
@@ -16,7 +17,7 @@ Sviluppare un sistema per il tracciamento di un veicolo tramite GPS. Il trigger 
 Sullo smartphone:
 * si deve ricevere un messaggio automatico (con BOT Telegram) nel momento in cui si passa dallo stato statico ad uno stato con una variazione sulla direzione x (o y) superiore a 15 metri (o comunque la minima distanza che identifichi uno spostamento superiore alla normale ricalibrazione della posizione dovuta all’incertezza del posizionamento GPS).
 * in un generico percorso da un punto A a un punto B, al raggiungimento del punto B (assenza di variazione direzione x o y – macchina ferma per un periodo superiore ai 30 secondi), il BOT Telegram deve comunicare le coordinate GPS della posizione statica.
-* le coordinate GPS dello SBC devono essere fornite anche su specifica richiesta al BOT Telegram indipendentemente dal verificarsi degli eventi menzionati in precedenza (es., alla stringa “posizione” il bot deve rispondere con le coordinate GPS, ad esempio “@39.2292043 9.109925” in modo tale che tramite browser si riconduca al posizionamento).
+* le coordinate GPS dello SBC devono essere fornite anche su specifica richiesta al BOT Telegram indipendentemente dal verificarsi degli eventi menzionati in precedenza (es., alla stringa “posizione” il bot deve rispondere con le coordinate GPS, ad esempio “\@39.2292043 9.109925” in modo tale che tramite browser si riconduca al posizionamento).
 * Il tracking e la posizione devono essere visualizzati su mappa attraverso una
 applicazione in ambiente Android
 
@@ -121,12 +122,12 @@ Il GPS ha anche bisogno di un'antenna. Per questo caso specifico si consiglia di
 
 ## Setup del software
 
-Andiamo a preparare gli script necessari su Arduino e NodeMCU:
+Andiamo a preparare gli script necessari su Arduino e NodeMCU (contenuti nella cartella "flash_to_boards"):
 
-| Board  | Script         | Link    |
-|:-------|:---------------|:--------|
-| NodeMCU| SCBNode.ino    |[Link]() |
-| Arduino| SCBArduino.ino |[Link]() |
+| Board  | Script         | Link                                                                                             |
+|:-------|:---------------|:-------------------------------------------------------------------------------------------------|
+| NodeMCU| SCBNode.ino    |[Link](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/flash_to_boards/SCBNode.ino)    |
+| Arduino| SCBArduino.ino |[Link](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/flash_to_boards/SCBArduino.ino) |
 
 Prima di caricare gli sketch sulla board è importante inserire alcuni parametri per il setup della connettività WiFi e le chiavi per le API.
 
@@ -134,14 +135,9 @@ Prima di caricare gli sketch sulla board è importante inserire alcuni parametri
 
 Inserire nello script del NodeMCU i seguenti parametri. Fare attenzione alle lettere maiuscole e minuscole, o lo sketch non funzionerà correttamente.
 
-char ssid[]     = "";    // SSID della rete
-char password[] = "";    // password
-
-____
-TODO
-____
-Project_name
-API_Key
+char ssid[]     = "";               // SSID della rete
+char password[] = "";               // password
+String yourProjectName = "";        // your GAE project name
 
 #### Google cloud platform
 
@@ -150,10 +146,10 @@ Per l'hosting del bot e del database dobbiamo utilizzare servizi Cloud. Abbiamo 
 Una volta effettuato l'accesso, è necessario creare un progetto su [GCP console](https://console.cloud.google.com). 
 
 Creazione del progetto: 
-![alt text](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/images/create_project.png "Create Project")
+![Creazione progetto](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/images/create_project.png "Create Project")
 
 Creazione applicazione App Engine, semplicemente aprendo la shell di gcloud nel menu appengine:
-![alt text](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/images/app_engine.png "Create Project")
+![Creazione applicazione](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/images/app_engine.png "Create Project")
 
 
 #### Bot Telegram
@@ -168,10 +164,20 @@ Una volta effettuati i passaggi elencati, si può modificare il file:
 |----------------|----------------------------------------------------------------------------|
 |app.yaml        |[Link](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/app.yaml) |
 
+Adesso è il momento di creare un nuovo bot con BotFather. Alla fine di questo processo avremo la chiave API necessaria per comandare il bot.
+
+Per prima cosa cerchiamo \@BotFather su Telegram. Apriamo la conversazione e premiamo sulla scritta "avvia" o "start" in basso. Seguire le istruzioni per creare un nuovo bot.
+
+Ricordiamoci la API key, in quanto dovremo usarla in seguito.
+
+
+[Tutorial Bot Father](http://www.nigiara.it/telegram/come-aprire-i-bot-su-telegram.htm)
+
 _____
 TODO
 _____
 
+Tutorial:
 
 [Upload gcloud](https://cloud.google.com/appengine/docs/standard/python/getting-started/deploying-the-application)
 
