@@ -16,6 +16,7 @@ class PositionHandler(webapp2.RequestHandler):
     def post(self):
 
         api_key = self.request.get('apiKey')
+        #user_requested = self.request.get('requested')
         timestamp = self.request.get('data')
         latitude = self.request.get('latitude')
         longitude = self.request.get('longitude')

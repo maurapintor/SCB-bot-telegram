@@ -7,3 +7,4 @@ class SensedData(ndb.Model):
     updated_at = ndb.DateTimeProperty(auto_now=False)
     speed = ndb.StringProperty()
     trip_id = ndb.IntegerProperty()
+    user_requested = ndb.StringProperty()
