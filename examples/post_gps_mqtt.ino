@@ -6,14 +6,23 @@
 #include <WiFiClientSecure.h>
 #include <PubSubClient.h>
 
+/*
+ *                   ----Made by Pizza-Team----
+ *     This sketch detects movement through an accelerometer connected to Arduino
+ *     and sends to serial monitor of NodeMCU the GPS coordinates when triggered
+ *     (communication through alarmPin). Then it sends the values to the google datastore.
+ *     IMPORTANT: set the connection variables before upload!
+ */
+
 //---------------------------------------------------------------------------------//
 
 /*
- * Wi-Fi settings
+ * Connection settings
  */
 
 char ssid[]     = "";    // your network SSID (name)
-char password[] = "";    // network key
+char password[] = "";    // sqwswzxaqyour network key
+String yourProjectName = "";
 //---------------------------------------------------------------------------------//
 
 
@@ -52,20 +61,26 @@ int active = LOW;
 int ledPin = LED_BUILTIN;
 //---------------------------------------------------------------------------------//
 
-//String apiKey ="smartcarbox-xobractrams";
+
 String apiKey = "prova";
-const char* server = "smartcar-box.appspot.com";
+const char * host = ".appspot.com";
+String server_name = yourProjectName + host;
+const char *server = server_name.c_str();
+
+
+
 int sent = 0;
+
 
 
 void setup() {
  //Monitor output
  Serial.begin(38400);
  pinMode(alarmPin, INPUT);
- 
+
  //GPS output
  ss.begin(9600);
- 
+
  //Wi-fi output
  Serial.print("Connecting Wifi: ");
  Serial.println(ssid);
@@ -116,7 +131,7 @@ void printPosition(){
   if (flag){
     gps.f_get_position(&flat, &flon, &age);
     float fspeed = gps.f_speed_kmph();
-    
+
     Serial.println(flat, 6);
     Serial.println(flon, 6);
     Serial.println(fspeed, 6);
@@ -134,12 +149,12 @@ void printPosition(){
 
 
 void sendPosition(float lat, float lon, float fspeed, String(data))
-{  
+{
    WiFiClient wificlient;
-  
-   if (wificlient.connect(server, 80)) { 
+
+   if (wificlient.connect(server, 80)) {
    Serial.println("WiFi Client connected, sending data ");
-   
+
    String postStr = "latitude=";
    postStr += String(lat, 6);
    postStr += "&longitude=";
@@ -167,17 +182,17 @@ void sendPosition(float lat, float lon, float fspeed, String(data))
    wificlient.print(postStr);
    delay(1000);
 
-     
+
 while (wificlient.available()) {
     String line = wificlient.readStringUntil('\r');
     Serial.print(line);
   }
   Serial.println();
   Serial.println("closing connection");
-   
+
    }//end if
 
-   
+
    sent++;
  wificlient.stop();
 }
@@ -185,7 +200,7 @@ while (wificlient.available()) {
 static void smartdelay(unsigned long ms)
 {
   unsigned long start = millis();
-  do 
+  do
   {
     while (ss.available())
       gps.encode(ss.read());
@@ -204,7 +219,7 @@ static String print_date(TinyGPS &gps)
     Serial.print("********** ******** ");
   else
   {
-    
+
     //sprintf(sz, "%02d/%02d/%02d %02d:%02d:%02d ",
     //    month, day, year, hour, minute, second);
     sprintf(sz, "%02d-%02d-%02d_%02d:%02d:%02d", month, day, year, hour, minute, second);
@@ -228,7 +243,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
   Serial.println();
 
-  printPosition();  
+  printPosition();
 
 }
 
@@ -253,4 +268,3 @@ void reconnect() {
     }
   }
 }
-
