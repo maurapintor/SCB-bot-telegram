@@ -124,10 +124,10 @@ Il GPS ha anche bisogno di un'antenna. Per questo caso specifico si consiglia di
 
 Andiamo a preparare gli script necessari su Arduino e NodeMCU:
 
-| Board  | Script         | Link    |
-|:-------|:---------------|:--------|
-| NodeMCU| SCBNode.ino    |[Link]() |
-| Arduino| SCBArduino.ino |[Link]() |
+| Board  | Script         | Link                                                                                             |
+|:-------|:---------------|:-------------------------------------------------------------------------------------------------|
+| NodeMCU| SCBNode.ino    |[Link](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/flash_to_boards/SCBNode.ino)    |
+| Arduino| SCBArduino.ino |[Link](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/flash_to_boards/SCBArduino.ino) |
 
 Prima di caricare gli sketch sulla board è importante inserire alcuni parametri per il setup della connettività WiFi e le chiavi per le API.
 
