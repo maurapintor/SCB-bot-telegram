@@ -12,8 +12,8 @@
  * Wi-Fi settings
  */
 
-char ssid[]     = "we<3pizza";    // your network SSID (name)
-char password[] = "pizzateam";    // sqwswzxaqyour network key
+char ssid[]     = "";    // your network SSID (name)
+char password[] = "";    // network key
 //---------------------------------------------------------------------------------//
 
 
