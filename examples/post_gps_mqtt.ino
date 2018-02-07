@@ -7,18 +7,18 @@
 #include <PubSubClient.h>
 
 /*
- *                   ----Made by Pizza-Team----
- *     This sketch detects movement through an accelerometer connected to Arduino
- *     and sends to serial monitor of NodeMCU the GPS coordinates when triggered
- *     (communication through alarmPin). Then it sends the values to the google datastore.
- *     IMPORTANT: set the connection variables before upload!
- */
+                     ----Made by Pizza-Team----
+       This sketch detects movement through an accelerometer connected to Arduino
+       and sends to serial monitor of NodeMCU the GPS coordinates when triggered
+       (communication through alarmPin). Then it sends the values to the google datastore.
+       IMPORTANT: set the connection variables before upload!
+*/
 
 //---------------------------------------------------------------------------------//
 
 /*
- * Connection settings
- */
+   Connection settings
+*/
 
 char ssid[]     = "";    // your network SSID (name)
 char password[] = "";    // sqwswzxaqyour network key
@@ -27,8 +27,8 @@ String yourProjectName = "";
 
 
 /*
- *     GPS settings
- */
+       GPS settings
+*/
 TinyGPS gps;
 SoftwareSerial ss(4, 2);
 
@@ -43,8 +43,8 @@ String data;
 //---------------------------------------------------------------------------------//
 
 /*
- * mqtt settings
- */
+   mqtt settings
+*/
 const char* mqtt_server = "iot.eclipse.org";
 WiFiClient espClient;
 PubSubClient mqttclient(espClient);
@@ -54,8 +54,8 @@ int value = 0;
 
 
 /*
- * Pin settings
- */
+   Pin settings
+*/
 int alarmPin = 13;
 int active = LOW;
 int ledPin = LED_BUILTIN;
@@ -74,21 +74,21 @@ int sent = 0;
 
 
 void setup() {
- //Monitor output
- Serial.begin(38400);
- pinMode(alarmPin, INPUT);
+  //Monitor output
+  Serial.begin(38400);
+  pinMode(alarmPin, INPUT);
 
- //GPS output
- ss.begin(9600);
+  //GPS output
+  ss.begin(9600);
 
- //Wi-fi output
- Serial.print("Connecting Wifi: ");
- Serial.println(ssid);
- WiFi.begin(ssid, password);
- delay(500);
- pinMode(ledPin, OUTPUT);
+  //Wi-fi output
+  Serial.print("Connecting Wifi: ");
+  Serial.println(ssid);
+  WiFi.begin(ssid, password);
+  delay(500);
+  pinMode(ledPin, OUTPUT);
 
- while (WiFi.status() != WL_CONNECTED) {
+  while (WiFi.status() != WL_CONNECTED) {
     Serial.print(".");
     digitalWrite(ledPin, !digitalRead(ledPin));     // set pin to the opposite state
     delay(500);
@@ -107,16 +107,16 @@ void setup() {
 
 void loop() {
 
-active = digitalRead(alarmPin);
-if(active == HIGH){
-  printPosition();
+  active = digitalRead(alarmPin);
+  if (active == HIGH) {
+    printPosition();
   }
-delay(10);
+  delay(10);
   if (!mqttclient.connected()) {
     reconnect();
   }
-mqttclient.loop();
-delay(10);
+  mqttclient.loop();
+  delay(10);
 
 }
 
@@ -125,10 +125,10 @@ delay(10);
 
 
 /*
- * GPS Functions
- */
-void printPosition(){
-  if (flag){
+   GPS Functions
+*/
+void printPosition() {
+  if (flag) {
     gps.f_get_position(&flat, &flon, &age);
     float fspeed = gps.f_speed_kmph();
 
@@ -139,7 +139,7 @@ void printPosition(){
     Serial.println();
     sendPosition(flat, flon, fspeed, data);
     smartdelay(1000);
-   }
+  }
   else {
     gps.f_get_position(&flat, &flon, &age);
     smartdelay(1000);
@@ -150,51 +150,53 @@ void printPosition(){
 
 void sendPosition(float lat, float lon, float fspeed, String(data))
 {
-   WiFiClient wificlient;
+  WiFiClient wificlient;
 
-   if (wificlient.connect(server, 80)) {
-   Serial.println("WiFi Client connected, sending data ");
+  if (wificlient.connect(server, 80)) {
+    Serial.println("WiFi Client connected, sending data ");
 
-   String postStr = "latitude=";
-   postStr += String(lat, 6);
-   postStr += "&longitude=";
-   postStr += String(lon, 6);
-   postStr += "&speed=";
-   postStr += String(fspeed, 6);
-   postStr += "&data=";
-   postStr += data;
-   postStr += "&apiKey=";
-   postStr += apiKey;
-
-
-   postStr += "\r\n\r\n";
-   String coords = String(lat, 6) + "," + String(lon, 6);
-
-   wificlient.print("POST /position/put HTTP/1.1\n");
-   wificlient.print("Host: smartcar-box.appspot.com\n");
-   wificlient.print("Connection: close\n");
-   wificlient.print("Content-Type: application/x-www-form-urlencoded\n");
-   wificlient.print("Content-Length: ");
-//   wificlient.print("apiKey: " + apiKey + "\n");
-
-   wificlient.print(postStr.length());
-   wificlient.print("\n\n");
-   wificlient.print(postStr);
-   delay(1000);
+    String postStr = "latitude=";
+    postStr += String(lat, 6);
+    postStr += "&longitude=";
+    postStr += String(lon, 6);
+    postStr += "&speed=";
+    postStr += String(fspeed, 6);
+    postStr += "&data=";
+    postStr += data;
+    postStr += "&apiKey=";
+    postStr += apiKey;
 
 
-while (wificlient.available()) {
-    String line = wificlient.readStringUntil('\r');
-    Serial.print(line);
-  }
-  Serial.println();
-  Serial.println("closing connection");
+    postStr += "\r\n\r\n";
+    String coords = String(lat, 6) + "," + String(lon, 6);
 
-   }//end if
+    wificlient.print("POST /position/put HTTP/1.1\n");
+    wificlient.print("Host: smartcar-box.appspot.com\n");
+    wificlient.print("Connection: close\n");
+    wificlient.print("Content-Type: application/x-www-form-urlencoded\n");
+    wificlient.print("Content-Length: ");
+    //   wificlient.print("apiKey: " + apiKey + "\n");
+
+    wificlient.print(postStr.length());
+    wificlient.print("\n\n");
+    wificlient.print(postStr);
+    delay(1000);
 
 
-   sent++;
- wificlient.stop();
+    while (wificlient.available()) {
+      String line = wificlient.readStringUntil('\r');
+      Serial.print(line);
+    }
+    Serial.println();
+    Serial.println("closing connection");
+
+  }//end if
+
+
+  sent++;
+  wificlient.stop();
+  delay(5000);
+
 }
 
 static void smartdelay(unsigned long ms)
@@ -231,8 +233,8 @@ static String print_date(TinyGPS &gps)
 }
 
 /*
- * mqtt functions
- */
+   mqtt functions
+*/
 
 void callback(char* topic, byte* payload, unsigned int length) {
   Serial.print("Message arrived [");
