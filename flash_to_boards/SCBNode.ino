@@ -21,8 +21,10 @@
 */
 
 char ssid[]     = "";    // your network SSID (name)
-char password[] = "";    // your network key
+char password[] = "";    // sqwswzxaqyour network key
 String yourProjectName = "";
+const char* mqtt_server = "";
+
 //---------------------------------------------------------------------------------//
 
 
@@ -45,7 +47,6 @@ String data;
 /*
    mqtt settings
 */
-const char* mqtt_server = "iot.eclipse.org";
 WiFiClient espClient;
 PubSubClient mqttclient(espClient);
 long lastMsg = 0;
@@ -109,7 +110,7 @@ void loop() {
 
   active = digitalRead(alarmPin);
   if (active == HIGH) {
-    printPosition();
+    printPosition(false);
   }
   delay(10);
   if (!mqttclient.connected()) {
@@ -127,7 +128,7 @@ void loop() {
 /*
    GPS Functions
 */
-void printPosition() {
+void printPosition(bool is_requested) {
   if (flag) {
     gps.f_get_position(&flat, &flon, &age);
     float fspeed = gps.f_speed_kmph();
@@ -137,7 +138,7 @@ void printPosition() {
     Serial.println(fspeed, 6);
     data = print_date(gps);
     Serial.println();
-    sendPosition(flat, flon, fspeed, data);
+    sendPosition(flat, flon, fspeed, data, is_requested);
     smartdelay(1000);
   }
   else {
@@ -148,7 +149,7 @@ void printPosition() {
 }
 
 
-void sendPosition(float lat, float lon, float fspeed, String(data))
+void sendPosition(float lat, float lon, float fspeed, String(data), bool is_requested)
 {
   WiFiClient wificlient;
 
@@ -165,7 +166,10 @@ void sendPosition(float lat, float lon, float fspeed, String(data))
     postStr += data;
     postStr += "&apiKey=";
     postStr += apiKey;
-
+    postStr += "&requested=";
+    postStr += String(is_requested);
+    Serial.println(is_requested);
+    Serial.println(String(is_requested));
 
     postStr += "\r\n\r\n";
     String coords = String(lat, 6) + "," + String(lon, 6);
@@ -245,7 +249,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
   Serial.println();
 
-  printPosition();
+  printPosition(true);
 
 }
 
@@ -260,7 +264,7 @@ void reconnect() {
     // Attempt to connect
     if (mqttclient.connect(clientId.c_str())) {
       Serial.println("connected");
-      mqttclient.subscribe("scb/control");
+      mqttclient.subscribe("scb");
     } else {
       Serial.print("failed, rc=");
       Serial.print(mqttclient.state());
