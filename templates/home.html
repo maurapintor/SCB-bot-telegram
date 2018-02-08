@@ -1,44 +1,21 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <style>
-       #map {
-        height: 400px;
-        width: 100%;
-       }
-    </style>
-  </head>
-  <body>
-    <h3>My Smart Car Box Demo</h3>
-    <div id="map"></div>
-    <script>
-      function initMap() {
-        var centerMap = {lat: 39.210129, lng: 9.113895};
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<link rel="icon" type="image/png" href="../static/assets/img/favicon.ico">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 14,
-            center: centerMap
-        });
+	<title>SCB Project - Pizza Team</title>
 
-        var locations = [[39.210129, 9.133895],[39.230129, 9.113895],[39.220129, 9.113895],[39.210129, 9.123895]];
-        var marker, i;
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
 
-        for (i = 0; i < locations.length; i++) {
-            marker = new google.maps.Marker({
-                position: ({lat:locations[i][0], lng:locations[i][1]}),
-                title: "locations_title",
-                map: map
-            });
-        };
-        marker.setMap(map);
+</head>
+<body>
+
+    <h1>Home</h1>
 
 
-
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAE1oQtwl5KHeuS5JPWIn_gMio2jnWWGg&callback=initMap">
-    </script>
-  </body>
+</body>
 
 </html>
