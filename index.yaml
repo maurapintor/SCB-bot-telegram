@@ -3,5 +3,6 @@ indexes:
 - kind: SensedData
   properties:
   - name: trip_id
+    direction: desc
   - name: updated_at
     direction: desc

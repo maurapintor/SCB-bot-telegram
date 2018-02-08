@@ -28,10 +28,10 @@ class PositionHandler(webapp2.RequestHandler):
         api_key = 'prova'
         if api_key == 'prova':
 
-            sense_data = SensedData().query().order(+SensedData.trip_id).order(
-                -SensedData.updated_at).fetch()
-
-            is_user = bool(user_requested)
+            sense_data = SensedData().query().order(-SensedData.trip_id).\
+                order(-SensedData.updated_at).fetch()
+            print sense_data
+            is_user = bool(int(user_requested))
             if len(sense_data) is 0:
                 trip_id = 0
                 self.put_data(latitude, longitude, speed, updated_at, trip_id,
@@ -39,6 +39,7 @@ class PositionHandler(webapp2.RequestHandler):
             elif not is_user:
                 print (sense_data[0].updated_at)
                 last_sample = sense_data[0]
+
                 trip_id = sense_data[0].trip_id
                 # "%02d-%02d-%02d_%02d:%02d:%02d", month, day, year, hour, minute, second
                 is_new_trip = check_trip(last_sample, updated_at)
