@@ -1,0 +1,7 @@
+indexes:
+
+- kind: SensedData
+  properties:
+  - name: trip_id
+  - name: updated_at
+    direction: desc

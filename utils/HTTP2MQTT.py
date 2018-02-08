@@ -2,7 +2,7 @@ import urllib
 
 from google.appengine.api import urlfetch
 
-mqtt_bridge_url = 'http://34.217.126.242/MqttPublish/publish.php'
+mqtt_bridge_url = 'http://tools.lysis-iot.com/MqttPublish/publish.php'
 
 
 def mqtt_publish():
@@ -10,7 +10,7 @@ def mqtt_publish():
         {'topic': 'scb', 'message': 'position'})
 
     result = urlfetch.fetch(
-        url='http://34.217.126.242/MqttPublish/publish.php',
+        url='http://tools.lysis-iot.com/MqttPublish/publish.php',
         payload=form_data,
         method=urlfetch.POST)
     return result
