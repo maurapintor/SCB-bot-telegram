@@ -2,11 +2,11 @@ import json
 import logging
 
 import webapp2
-from google.appengine.api import urlfetch
+from google.appengine.api import urlfetch, memcache
 
 from models.Enable import setEnabled, getEnabled
 from utils.HTTP2MQTT import mqtt_publish
-from utils.telegramMsg import reply
+from utils.telegramMsg import reply, sendToAll
 
 
 class WebhookHandler(webapp2.RequestHandler):
@@ -40,18 +40,22 @@ class WebhookHandler(webapp2.RequestHandler):
 
 
             elif getEnabled(chat_id):
-                if text.lower() == '/position':
+                if text.lower() == '/test':
+                    sendToAll()
+
+                elif text.lower() == '/position':
 
                     # mqtt request
                     # datastore write
 
                     response = mqtt_publish()
+                    memcache.add(key='chat_id', value=chat_id, time=3600)
 
                     result = 200
 
                     if result == 200:
                         reply(chat_id, message_id,
-                              'fatto mqtt')
+                              'Richiesta inviata')
 
                     else:
                         reply(chat_id, message_id, 'Qualcosa went wrong!')
@@ -71,9 +75,3 @@ class WebhookHandler(webapp2.RequestHandler):
                 'telebot starter kit, created by yukuku: https://github.com/yukuku/telebot')
         elif 'what time' in text:
             reply(chat_id, message_id, 'look at the corner of your screen!')
-        else:
-            if getEnabled(chat_id):
-                reply(chat_id, message_id,
-                      'I got your message! (but I do not know how to answer)')
-            else:
-                logging.info('not enabled for chat_id {}'.format(chat_id))

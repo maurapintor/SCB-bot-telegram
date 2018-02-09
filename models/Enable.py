@@ -10,7 +10,6 @@ class EnableStatus(ndb.Model):
 def setEnabled(chat_id, yes):
     es = EnableStatus.get_or_insert(str(chat_id))
     es.enabled = yes
-    es.chat_id = chat_id
     es.put()
 
 

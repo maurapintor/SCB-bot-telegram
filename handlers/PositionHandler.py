@@ -3,10 +3,12 @@ import json
 import logging
 
 import webapp2
+from google.appengine.api import memcache
 
 from models.SenseData import SensedData
 from utils.Trip import check_trip
-from utils.telegramMsg import sendLocation, sendMsg
+from utils.telegramMsg import sendLocation, sendMsg, sendToAll, \
+    sendLocationToAll
 
 chat_id = -195433658
 
@@ -46,9 +48,8 @@ class PositionHandler(webapp2.RequestHandler):
 
                 if is_new_trip:
                     trip_id += 1
-                    sendMsg(chat_id,
-                            "Attenzione il tuo veicolo si sta muovendo!")
-                    sendLocation(chat_id, latitude, longitude)
+                    sendToAll("Attenzione il tuo veicolo si sta muovendo!")
+                    sendLocationToAll(latitude, longitude)
 
                 self.put_data(latitude, longitude, speed, updated_at, trip_id,
                               user_requested)
@@ -56,6 +57,13 @@ class PositionHandler(webapp2.RequestHandler):
                 trip_id = -1
                 self.put_data(latitude, longitude, speed, updated_at, trip_id,
                               user_requested)
+                try:
+                    ch_id = memcache.get('chat_id')
+                    memcache.flush_all()
+                    sendLocation(ch_id, latitude, longitude)
+                    logging.warning("PositionHandler, TRY is_user elif scope")
+                except:
+                    pass
                 logging.warning("PositionHandler, is_user elif scope")
 
             self.response.status_int = 200
