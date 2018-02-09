@@ -4,8 +4,9 @@ import urllib2
 
 from google.appengine.api import urlfetch
 
-TOKEN = '502810340:AAEQKZAkwwhvA0B6Fkk5rTvlY_ERWp1Nd5k'
-BASE_URL = 'https://api.telegram.org/bot' + TOKEN + '/'
+from utils.token import get_base_url
+
+BASE_URL = get_base_url()
 
 
 def sendLocation(chat_id, latitude, longitude):
@@ -33,6 +34,30 @@ def sendMsg(chat_id, msg = None):
             'chat_id': str(chat_id),
             'text': msg.encode('utf-8'),
             'disable_web_page_preview': 'true',
+        })).read()
+
+    else:
+        logging.error('no msg or img specified')
+        resp = None
+
+    logging.info('send response:')
+    logging.info(resp)
+
+def sendToAll():
+    pass
+
+
+def reply(chat_id, message_id, msg=None, img=None):
+    if msg:
+        # logging.info(str(chat_id.__dict__))
+        logging.info(msg.encode('utf-8'))
+        logging.info(str(message_id))
+
+        resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+            'chat_id': str(chat_id),
+            'text': msg.encode('utf-8'),
+            'disable_web_page_preview': 'true',
+            'reply_to_message_id': str(message_id),
         })).read()
 
     else:

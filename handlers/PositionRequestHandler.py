@@ -1,16 +1,8 @@
+import logging
 import urllib
 
 import webapp2
-import json
-
 from google.appengine.api import urlfetch
-
-from models.SenseData import SensedData
-import datetime as dt
-import logging
-
-from utils.Trip import check_trip
-from utils.telegramMsg import sendLocation, sendMsg
 
 
 class PositionRequestHandler(webapp2.RequestHandler):
