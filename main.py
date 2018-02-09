@@ -3,7 +3,7 @@ import datetime
 import webapp2
 
 from handlers import PositionRequestHandler, MainHandler, MeHandler, \
-    GetUpdatesHandler, WebhookHandler
+    GetUpdatesHandler, WebhookHandler, StopHandler
 from handlers.MapHandler import MapHandler
 from handlers.PositionHandler import PositionHandler
 from handlers.SetWebHookHandler import SetWebhookHandler
@@ -53,4 +53,5 @@ app = webapp2.WSGIApplication([
     ('/position/put', PositionHandler),
     ('/position/get', PositionRequestHandler),
     ('/dataRequestLastAjax', AjaxHandler),
+    ('/position/stop',StopHandler),
 ], debug=True)

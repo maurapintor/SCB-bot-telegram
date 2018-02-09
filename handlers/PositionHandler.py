@@ -10,8 +10,6 @@ from utils.Trip import check_trip
 from utils.telegramMsg import sendLocation, sendMsg, sendToAll, \
     sendLocationToAll
 
-chat_id = -195433658
-
 
 class PositionHandler(webapp2.RequestHandler):
     def post(self):
@@ -32,7 +30,7 @@ class PositionHandler(webapp2.RequestHandler):
 
             sense_data = SensedData().query().order(-SensedData.trip_id).\
                 order(-SensedData.updated_at).fetch()
-            print sense_data
+            print (sense_data)
             is_user = bool(int(user_requested))
             if len(sense_data) is 0:
                 trip_id = 0

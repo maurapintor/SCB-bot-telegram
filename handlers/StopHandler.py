@@ -2,9 +2,8 @@ import logging
 
 import webapp2
 
-from utils.telegramMsg import sendMsg
+from utils.telegramMsg import  sendToAll
 
-chat_id = -195433658
 
 
 class StopHandler(webapp2.RequestHandler):
@@ -14,7 +13,7 @@ class StopHandler(webapp2.RequestHandler):
 
         api_key = 'prova'
         if api_key == 'prova':
-            sendMsg(chat_id, "Pare che il veicolo si sia fermato.")
+            sendToAll( "Pare che il veicolo si sia fermato.")
 
         else:
             logging.warning(
