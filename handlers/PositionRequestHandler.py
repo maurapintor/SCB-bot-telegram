@@ -4,6 +4,9 @@ import urllib
 import webapp2
 from google.appengine.api import urlfetch
 
+url = 'http://tools.lysis-iot.com/MqttPublish/publish.php'
+topic = 'scb'
+
 
 class PositionRequestHandler(webapp2.RequestHandler):
     def post(self):
@@ -13,10 +16,10 @@ class PositionRequestHandler(webapp2.RequestHandler):
         api_key = 'prova'
         if api_key == 'prova':
             form_data = urllib.urlencode(
-                {'topic': 'scb', 'message': 'position'})
+                {'topic': topic, 'message': 'position'})
 
             response = urlfetch.fetch(
-                url='http://tools.lysis-iot.com/MqttPublish/publish.php',
+                url=url,
                 payload=form_data,
                 method=urlfetch.POST)
 

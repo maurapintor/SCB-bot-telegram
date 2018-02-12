@@ -71,7 +71,8 @@ const char *server = server_name.c_str();
 
 
 int sent = 0;
-
+unsigned long last_req = 0;
+int sent_stop = 0;
 
 
 void setup() {
@@ -111,7 +112,14 @@ void loop() {
   active = digitalRead(alarmPin);
   if (active == HIGH) {
     printPosition(false);
+    unsigned long last_req = millis();
+    sent_stop = 0;
   }
+  if (millis()-last_req > 300000 && !sent_stop){
+    sendStop();
+    sent_stop = 1;
+  }
+
   delay(10);
   if (!mqttclient.connected()) {
     reconnect();
@@ -175,7 +183,7 @@ void sendPosition(float lat, float lon, float fspeed, String(data), bool is_requ
     String coords = String(lat, 6) + "," + String(lon, 6);
 
     wificlient.print("POST /position/put HTTP/1.1\n");
-    wificlient.print("Host: smartcar-box.appspot.com\n");
+    wificlient.print("Host: "+yourProjectName+".appspot.com\n");
     wificlient.print("Connection: close\n");
     wificlient.print("Content-Type: application/x-www-form-urlencoded\n");
     wificlient.print("Content-Length: ");
@@ -274,3 +282,36 @@ void reconnect() {
     }
   }
 }
+
+
+
+void sendStop()
+{
+  WiFiClient wificlient;
+
+  if (wificlient.connect(server, 80)) {
+    Serial.println("WiFi Client connected, sending data ");
+
+    String postStr = "apiKey=";
+    postStr += apiKey;
+    postStr += "&latitude=";
+    postStr += flat;
+    postStr += "&longitude=";
+    postStr += flon;
+
+    postStr += "\r\n\r\n";
+
+    wificlient.print("POST /position/stop HTTP/1.1\n");
+    wificlient.print("Host: "+yourProjectName+".appspot.com\n");
+    wificlient.print("Connection: close\n");
+    wificlient.print("Content-Type: application/x-www-form-urlencoded\n");
+    wificlient.print("Content-Length: ");
+
+    wificlient.print(postStr.length());
+    wificlient.print("\n\n");
+    wificlient.print(postStr);
+    delay(1000);
+  }
+
+  }
+
