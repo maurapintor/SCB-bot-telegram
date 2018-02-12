@@ -234,11 +234,11 @@ Ciò che dobbiamo fare è aprire il file handlers/PositionRequestHandler e modif
 Il topic deve essere modificato in ogni caso, inserendo quello scelto al passaggio precedente.
 
 ```python
-
-url = "tools.lysis-iot.com/MqttPubblish"
+url = 'http://tools.lysis-iot.com/MqttPublish/publish.php'
+topic = 'scb'
 ```
 
-
+Abbiamo configurato il web server in modo tale da fare una chiamata HTTP verso un servizio esterno, il quale si occupa di pubblicare sul topic MQTT desiderato. 
 
 
 
