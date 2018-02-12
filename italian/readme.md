@@ -181,7 +181,41 @@ Tutorial:
 
 [Upload gcloud](https://cloud.google.com/appengine/docs/standard/python/getting-started/deploying-the-application)
 
+## Richiesta posizione real-time
 
+Per la richiesta di posizione in real-time, è necessario comunicare in maniera diretta con il dispositivo hardware.
+Purtroppo non avendo a disposizione un indirizzo IP fisso e pubblico, non è possibile raggiungere il dispositivo con una normale chiamata HTTP, parimenti ad una pagina web.
+
+Per questa funzionalità si può usare il protocollo [MQTT](http://www.lucadentella.it/2016/10/24/mqtt-introduzione/), è necessario però configurare sia il software su NodeMcu che sul web server.
+
+**ATTENZIONE**: per proseguire è necessario utilizzare un bridge HTTP-MQTT in quanto il servizio cloud che abbiamo scelto non consente di farlo gratuitamente.
+Nel seguito faremo riferimento ad un bridge gratuito e messo a disposizione dall'Università di Cagliari.
+Inoltre sarà necessario utilizzare un proprio topic in modo tale che solo i nostri dispositivi lo ascoltino. 
+
+Aprire il file flash_to_boards/SCBNode.ino e inserire l'indirizzo del bridge e il topic in corrispondenza delle righe:
+
+```arduino
+const char* mqtt_server = "tools.lysis-iot.com";
+String topic = "scb";
+```
+
+quindi quello che abbiamo utilizzato è:
+*tools.lysis-iot.com*
+
+Annotare il nome del topic perchè sarà utile nel seguito.
+
+A questo punto abbiamo configurato il dispositivo in modo tale da farlo rimanere in ascolto sul nostro topic.
+
+La seconda parte riguarda la configurazione del web server, colui che effettivamente utilizzerà la parte di bridge. Ricordiamo che il bridge si occupa di tradurre una chiamata HTTP in una publish/subscribe MQTT.
+
+Ciò che dobbiamo fare è aprire il file handlers/PositionRequestHandler e modificare l'url e topic. L'url presente è relativo al servizio messo a disposizione dal dipartimento, se viene usato un altro bridge sarà necessario aggiornarlo.
+
+Il topic deve essere modificato in ogni caso, inserendo quello scelto al passaggio precedente.
+
+```python
+
+url = "tools.lysis-iot.com/MqttPubblish"
+```
 
 
 

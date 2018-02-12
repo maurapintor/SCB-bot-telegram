@@ -16,7 +16,7 @@ class PositionRequestHandler(webapp2.RequestHandler):
                 {'topic': 'scb', 'message': 'position'})
 
             response = urlfetch.fetch(
-                url='http://34.217.126.242/MqttPublish/publish.php',
+                url='http://tools.lysis-iot.com/MqttPublish/publish.php',
                 payload=form_data,
                 method=urlfetch.POST)
 
