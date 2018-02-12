@@ -100,9 +100,9 @@
 								<!-- swiper__module swiper-container -->
 								<div class="swiper__module swiper-container slide-image__front" data-options='{"slidesPerView":1,"spaceBetween":0}'>
 									<div class="swiper-wrapper">
-										<div class="slide-item" style="background-image: url('/assets/img/about/1.png');"></div>
-										<div class="slide-item" style="background-image: url('/assets/img/about/2.jpg');"></div>
-										<div class="slide-item" style="background-image: url('/assets/img/about/3b.jpg');"></div>
+										<div class="slide-item" style="background-image: url('assets/img/about/1.png');"></div>
+										<div class="slide-item" style="background-image: url('assets/img/about/2.jpg');"></div>
+										<div class="slide-item" style="background-image: url('assets/img/about/3b.jpg');"></div>
 									</div>
 									<div class="swiper-pagination-custom"></div>
 								</div><!-- End / swiper__module swiper-container -->
@@ -240,54 +240,109 @@
 					</div>
 					<div id="map"></div>
 					<script>
-					  function initMap() {
-						var centerMap = {lat: 39.210129, lng: 9.113895};
+						function initMap(){
+								var centerMap = {lat: 39.210129, lng: 9.113895};
 
-						var map = new google.maps.Map(document.getElementById('map'), {
-							zoom: 14,
-							center: centerMap
-						});
+								var map = new google.maps.Map(document.getElementById('map'), {
+									zoom: 14,
+									center: centerMap
+								});
 
-						var locations = {{ coordinate }}
-						var marker, i;
+								// Instantiate a directions service.
+								var directionsService = new google.maps.DirectionsService;
+								var directionsDisplay = new google.maps.DirectionsRenderer({
+									map: map,
+									suppressMarkers: true
+								});
 
-						var iconSymbol = {
-							url: 'http://www.klicktours.com//assets/admin/img/icon/car-xxl.png',
-							scaledSize: new google.maps.Size(50, 50)
-						};
+								var locations = {{coordinate}}
 
-						for (i = 0; i < locations.length; i++) {
-							marker = new google.maps.Marker({
-								position: ({lat:locations[i][0], lng:locations[i][1]}),
-								map: map,
-								icon: iconSymbol,
-								title: "original"
-							});
-						};
+								var iconSymbol = {
+									url: 'http://www.klicktours.com//assets/admin/img/icon/car-xxl.png',
+									scaledSize: new google.maps.Size(35, 35)
+								};
 
-						var lineSymbol = {
-							path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
-						};
+								for (i = 0; i < locations.length; i++) {
+									marker = new google.maps.Marker({
+										position: ({lat: locations[i][0], lng: locations[i][1]}),
+										map: map,
+										icon: iconSymbol,
+										title: "original"
+									});
+								};
 
-						for (i = 0; i < (locations.length - 1); i++) {
-							var name_line = new google.maps.Polyline({
-								path: [{lat: locations[i][0], lng: locations[i][1]}, {lat: locations[i + 1][0], lng: locations[i + 1][1]}],
-								icons: [{
-									icon: lineSymbol,
-									offset: '100%'
-								}],
-								map: map
+								for (i = 1; i < locations.length; i++) {
+
+									var markerA = new google.maps.Marker({
+										position: ({lat: locations[i-1][0], lng: locations[i-1][1]}),
+										icon: iconSymbol,
+										title: "point A",
+										label: "A",
+										map: map
+									});
+									var markerB = new google.maps.Marker({
+										position: ({lat: locations[i][0], lng: locations[i][1]}),
+										icon: iconSymbol,
+										title: "point B",
+										label: "B",
+										map: map
+									});
+								}
+
+							//var pointA = {lat: locations[0][0], lng: locations[0][1]};
+							//var pointB = {lat: locations[locations.length][0], lng: locations[locations.length][1]};
+								x = locations.length-1;
+
+								var pointA = {lat: locations[0][0], lng: locations[0][1]};
+								var pointB = {lat: locations[x][0], lng: locations[x][1]};
+
+							// get route from A to B
+							calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
+
+						}
+
+						function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
+						    var locations = {{coordinate}}
+							var waypts = [];
+
+						    if(locations.length>22){
+								maxfor = 22;
+							}
+							else maxfor = locations.length;
+
+							for (var i = 1; i < maxfor; i++) {
+								point = {lat: locations[i][0], lng: locations[i][1]};
+
+								waypts.push({
+									location: point,
+									stopover: true
+								});
+							}
+
+							//alert(waypts);
+
+							directionsService.route({
+								origin: pointA,
+								destination: pointB,
+								waypoints: waypts,
+								optimizeWaypoints: true,
+								avoidTolls: true,
+								avoidHighways: false,
+								travelMode: google.maps.TravelMode.DRIVING
+							}, function (response, status) {
+								if (status == google.maps.DirectionsStatus.OK) {
+									directionsDisplay.setDirections(response);
+								} else {
+									window.alert('Directions request failed due to ' + status);
+								}
 							});
 						}
-						marker.setMap(map);
 
 
-
-					  }
 					</script>
-					<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAE1oQtwl5KHeuS5JPWIn_gMio2jnWWGg&callback=initMap">
-						</script>
+					<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAE1oQtwl5KHeuS5JPWIn_gMio2jnWWGg&callback=initMap"></script>
 				</div>
+
 			</section>
 			<!-- End / Section -->
 

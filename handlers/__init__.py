@@ -1,7 +1,6 @@
 from handlers.PositionHandler import PositionHandler
 from handlers.GetUpdatesHandler import GetUpdatesHandler
 from handlers.MainHandler import MainHandler
-from handlers.MapHandler import MapHandler
 from handlers.MeHandler import MeHandler
 from handlers.PositionRequestHandler import PositionRequestHandler
 from handlers.SetWebHookHandler import SetWebhookHandler
