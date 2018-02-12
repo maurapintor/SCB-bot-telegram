@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Car Box</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Fonts-->
+
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/fontawesome/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/pe-icon/pe-icon.css"/>
+    <!-- Vendors-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendors/bootstrap/grid.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/vendors/magnific-popup/magnific-popup.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/vendors/swiper/swiper.css"/>
+    <!-- App & fonts-->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 2%;
+            padding: 0;
+        }
+
+        #floating-panel {
+            position: absolute;
+            top: 10px;
+            left: 25%;
+            z-index: 5;
+            background-color: #fff;
+            padding: 5px;
+            border: 1px solid #999;
+            text-align: center;
+            font-family: 'Roboto', 'sans-serif';
+            line-height: 30px;
+            padding-left: 10px;
+        }
+
+        #floating-panel {
+            background-color: #fff;
+            border: 1px solid #999;
+            left: 25%;
+            padding: 5px;
+            position: absolute;
+            top: 10px;
+            z-index: 5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-wrap">
+
+        <div class="container">
+            <h2 class="title__title">Map</h2>
+            <br>
+            <div id="map"></div>
+            <br>
+            <a class="btn btn-primary" href="map#id-3" role="button">Indietro</a>
+
+
+            <script>
+                function initMap() {
+                    var centerMap = {lat: 39.210129, lng: 9.113895};
+
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 14,
+                        center: centerMap
+                    });
+
+                    var locations = {{ coordinate }};
+                    var marker, i;
+
+                    var iconSymbol = {
+                        url: 'http://www.klicktours.com//assets/admin/img/icon/car-xxl.png',
+                        scaledSize: new google.maps.Size(50, 50)
+                    };
+
+                    for (i = 0; i < locations.length; i++) {
+                        marker = new google.maps.Marker({
+                            position: ({lat: locations[i][0], lng: locations[i][1]}),
+                            map: map,
+                            icon: iconSymbol,
+                            title: "original"
+                        });
+                    }
+                    ;
+
+                    var lineSymbol = {
+                        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+                    };
+
+                    for (i = 0; i < (locations.length - 1); i++) {
+                        var name_line = new google.maps.Polyline({
+                            path: [{lat: locations[i][0], lng: locations[i][1]}, {
+                                lat: locations[i + 1][0],
+                                lng: locations[i + 1][1]
+                            }],
+                            icons: [{
+                                icon: lineSymbol,
+                                offset: '100%'
+                            }],
+                            map: map
+                        });
+                    }
+                    marker.setMap(map);
+
+
+                }
+            </script>
+            <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAE1oQtwl5KHeuS5JPWIn_gMio2jnWWGg&callback=initMap">
+            </script>
+        </div>
+
+        <!-- footer -->
+        <div class="footer">
+            <div id="back-to-top"><i class="pe-7s-angle-up"></i></div>
+            <div class="container">
+                <div class="footer__wrapper">
+                    <div class="footer__social">
+
+                        <!-- social-icon -->
+                        <a class="social-icon" href="#"><i class="social-icon__icon fa fa-facebook"></i>
+                        </a><!-- End / social-icon -->
+
+
+                        <!-- social-icon -->
+                        <a class="social-icon" href="#"><i class="social-icon__icon fa fa-twitter"></i>
+                        </a><!-- End / social-icon -->
+
+
+                        <!-- social-icon -->
+                        <a class="social-icon" href="#"><i class="social-icon__icon fa fa-linkedin"></i>
+                        </a><!-- End / social-icon -->
+
+
+                        <!-- social-icon -->
+                        <a class="social-icon" href="#"><i class="social-icon__icon fa fa-behance"></i>
+                        </a><!-- End / social-icon -->
+
+
+                        <!-- social-icon -->
+                        <a class="social-icon" href="#"><i class="social-icon__icon fa fa-vimeo"></i>
+                        </a><!-- End / social-icon -->
+
+                    </div>
+                    <p class="footer__copy">2018 &copy; Copyright PizzaTeam. All rights Reserved.</p>
+                </div>
+            </div>
+        </div><!-- End / footer -->
+
+    </div>
+    <!-- Vendors-->
+    <script type="text/javascript" src="/assets/vendors/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/vendors/imagesloaded/imagesloaded.pkgd.js"></script>
+    <script type="text/javascript" src="/assets/vendors/isotope-layout/isotope.pkgd.js"></script>
+    <script type="text/javascript" src="/assets/vendors/jquery-one-page/jquery.nav.min.js"></script>
+    <script type="text/javascript" src="/assets/vendors/jquery.easing/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="/assets/vendors/jquery.matchHeight/jquery.matchHeight.min.js"></script>
+    <script type="text/javascript" src="/assets/vendors/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="/assets/vendors/masonry-layout/masonry.pkgd.js"></script>
+    <script type="text/javascript" src="/assets/vendors/swiper/swiper.jquery.js"></script>
+    <script type="text/javascript" src="/assets/vendors/menu/menu.js"></script>
+    <script type="text/javascript" src="/assets/vendors/typed/typed.min.js"></script>
+    <!-- App-->
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+</body>
+</html>

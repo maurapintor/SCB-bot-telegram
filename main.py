@@ -50,9 +50,51 @@ def getEnabled(chat_id):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        template_values = "ciao"
-        self.response.out.write(
-            template.render("templates/home.html", template_values))
+
+        sense_data = SensedData()
+
+        # print sense_data
+
+        data = sense_data.query().fetch()
+
+        # print "Data = {}".format(data[0])
+
+        lista_posizione_e_data = []
+        trip_total = []
+
+        for i in xrange(len(data)):
+            # if str(data[i]['timestamp'][:11]) == str(data[0]['timestamp'][:11]):
+                temp = []
+
+                a = data[i].latitude
+                b = data[i].longitude
+                c = data[i].trip_id
+                # d = data[i].updated_at
+                # e = data[i].trip_id
+
+                temp.append(float(a))
+                temp.append(float(b))
+                temp.append(int(c))
+                # temp.append(str(d))
+                # temp.append(int(e))
+
+                lista_posizione_e_data.append(temp)
+                trip_total.append(int(c))
+
+               # print lista_posizione_e_data
+
+        template_values = {
+            'coordinate': lista_posizione_e_data,
+            'trip_all': trip_total,
+            'last_trip': max(trip_total),
+            'lat': data[0].latitude,
+            'long': data[0].longitude,
+            'speed': data[0].speed,
+            'date': data[0].updated_at,
+            'trip': data[0].trip_id
+        }
+
+        self.response.write(template.render("templates/home.html", template_values))
 
 
 class MeHandler(webapp2.RequestHandler):
@@ -189,6 +231,7 @@ class MapHandler(webapp2.RequestHandler):
         # print "Data = {}".format(data[0])
 
         lista_posizione_e_data = []
+        trip_total = []
 
         for i in xrange(len(data)):
             # if str(data[i]['timestamp'][:11]) == str(data[0]['timestamp'][:11]):
@@ -196,19 +239,176 @@ class MapHandler(webapp2.RequestHandler):
 
                 a = data[i].latitude
                 b = data[i].longitude
-                # c = data[i].speed
+                c = data[i].trip_id
                 # d = data[i].updated_at
                 # e = data[i].trip_id
 
                 temp.append(float(a))
                 temp.append(float(b))
-                # temp.append(str(c))
+                temp.append(int(c))
+                # temp.append(str(d))
+                # temp.append(int(e))
+
+                lista_posizione_e_data.append(temp)
+                trip_total.append(int(c))
+
+               # print lista_posizione_e_data
+
+        template_values = {
+            'coordinate': lista_posizione_e_data,
+            'trip_all': trip_total,
+            'last_trip': max(trip_total),
+            'lat': data[0].latitude,
+            'long': data[0].longitude,
+            'speed': data[0].speed,
+            'date': data[0].updated_at,
+            'trip': data[0].trip_id
+        }
+
+        self.response.write(template.render("templates/mappa.html", template_values))
+
+
+class DirectionHandler(webapp2.RequestHandler):
+    def get(self):
+
+        sense_data = SensedData()
+
+        # print sense_data
+
+        data = sense_data.query().fetch()
+
+        start = "{},%20{}".format(data[0].latitude, data[0].longitude)
+        finish = "{},%20{}".format(data[-1].latitude, data[-1].longitude)
+
+        print start, finish
+
+        urlBase = "https://maps.googleapis.com/maps/api/directions/json"
+        origin = start
+        destination = finish
+        sensor = "false"
+        key = "AIzaSyBkrnpgt5jQGEfSi6miJ388nh53jf_lH_E"
+
+        url = urlBase + "?origin=" + origin + "&destination=" + destination + "&sensor=" + sensor + "&key=" + key
+
+        headers = {
+            'cache-control': "no-cache",
+            'postman-token': "248c881d-a192-e7ba-1dd4-2fadc5d52852",
+            'content-type': "application/x-www-form-urlencoded"
+            }
+
+        try:
+            result = urlfetch.fetch(
+                url=url,
+                method=urlfetch.POST,
+                headers=headers)
+
+            # print values.content
+            if result.status_code == 200:
+                response = json.loads(result.content)
+                # print response['routes'][0]['legs'][0]['steps']
+                # print type(response['routes'][0]['legs'][0]['steps'][0])
+
+                print response['routes'][0]['legs'][0]['steps'][0].keys()
+
+
+                data = []
+                lista_posizione_e_data = []
+                trip_total = []
+
+                for i in xrange(len(response['routes'][0]['legs'][0]['steps'])):
+                    latitude = response['routes'][0]['legs'][0]['steps'][i]['start_location']['lat']
+                    longitude = response['routes'][0]['legs'][0]['steps'][i]['start_location']['lng']
+                    print "Lat = {}, Lon = {}".format(latitude, longitude)
+
+                    temp = []
+
+                    a = latitude
+                    b = longitude
+                    # c = data[i].trip_id
+
+                    temp.append(float(a))
+                    temp.append(float(b))
+                    # temp.append(int(c))
+
+                    lista_posizione_e_data.append(temp)
+                    # trip_total.append(int(c))
+
+                    # print lista_posizione_e_data
+
+                template_values = {
+                    'coordinate': lista_posizione_e_data,
+                    # 'trip_all': trip_total,
+                    # 'last_trip': max(trip_total),
+                    # 'lat': data[0].latitude,
+                    # 'long': data[0].longitude,
+                    # 'speed': data[0].speed,
+                    # 'date': data[0].updated_at,
+                    # 'trip': data[0].trip_id
+                }
+
+                self.response.write(template.render("templates/home.html", template_values))
+
+                # pass
+
+            else:
+                print ("Errore")
+
+
+
+        except urlfetch.Error:
+            logging.exception('Caught exception fetching url')
+
+        pass
+
+
+class UltimoTragittoHandler(webapp2.RequestHandler):
+    def get(self):
+
+        sense_data = SensedData()
+
+        # print sense_data
+
+        data = sense_data.query().fetch()
+
+        # print "Data = {}".format(data[0])
+
+        lista_posizione_e_data = []
+
+        maxtemp = []
+        for i in xrange(len(data)):
+
+            c = data[i].trip_id
+            maxtemp.append(int(c))
+
+
+
+        for i in xrange(len(data)):
+            print data[i].trip_id
+            print "max = "
+            print max(maxtemp)
+
+            if (data[i].trip_id == max(maxtemp)):
+
+                print "son dentro"
+                temp = []
+
+                a = data[i].latitude
+                b = data[i].longitude
+                # c = data[i].trip_id
+                # d = data[i].updated_at
+                # e = data[i].trip_id
+
+                temp.append(float(a))
+                temp.append(float(b))
+                # temp.append(int(c))
                 # temp.append(str(d))
                 # temp.append(int(e))
 
                 lista_posizione_e_data.append(temp)
 
-               # print lista_posizione_e_data
+            print lista_posizione_e_data
+
+        # print lista_posizione_e_data
 
         template_values = {
             'coordinate': lista_posizione_e_data,
@@ -219,8 +419,7 @@ class MapHandler(webapp2.RequestHandler):
             'trip': data[0].trip_id
         }
 
-        self.response.write(template.render("templates/mappa.html", template_values))
-
+        self.response.write(template.render("templates/ultimo_tragitto.html", template_values))
 
 
 class PutHandler(webapp2.RequestHandler):
@@ -250,7 +449,9 @@ app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/position', PositionHandler),
     ('/map', MapHandler),
+    ('/direction', DirectionHandler),
     ('/put', PutHandler),
+    ('/ultimotragitto', UltimoTragittoHandler),
     ('/me', MeHandler),
     ('/updates', GetUpdatesHandler),
     ('/set_webhook', SetWebhookHandler),
