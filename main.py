@@ -1,26 +1,18 @@
-import json
-import logging
-import urllib
-import urllib2
-
 import datetime
 
+import webapp2
+
+from handlers import PositionRequestHandler, MainHandler, MeHandler, \
+    GetUpdatesHandler, WebhookHandler, StopHandler
+from handlers.MapHandler import MapHandler
+from handlers.PositionHandler import PositionHandler
+from handlers.SetWebHookHandler import SetWebhookHandler
 from models.SenseData import SensedData
 
-
-import webapp2
 # standard app engine imports
-from google.appengine.api import urlfetch
-from google.appengine.ext import ndb
-from google.appengine.ext.webapp import template
+from utils.token import get_base_url
 
-from handlers import PositionRequestHandler
-from handlers.PositionHandler import PositionHandler
-from utils.HTTP2MQTT import mqtt_publish
-
-TOKEN = '502810340:AAEQKZAkwwhvA0B6Fkk5rTvlY_ERWp1Nd5k'
-
-BASE_URL = 'https://api.telegram.org/bot' + TOKEN + '/'
+BASE_URL = get_base_url()
 
 
 # ================================
@@ -459,4 +451,5 @@ app = webapp2.WSGIApplication([
     ('/position/put', PositionHandler),
     ('/position/get', PositionRequestHandler),
     ('/dataRequestLastAjax', AjaxHandler),
+    ('/position/stop',StopHandler),
 ], debug=True)

@@ -1,16 +1,11 @@
+import logging
 import urllib
 
 import webapp2
-import json
-
 from google.appengine.api import urlfetch
 
-from models.SenseData import SensedData
-import datetime as dt
-import logging
-
-from utils.Trip import check_trip
-from utils.telegramMsg import sendLocation, sendMsg
+url = 'http://tools.lysis-iot.com/MqttPublish/publish.php'
+topic = 'scb'
 
 
 class PositionRequestHandler(webapp2.RequestHandler):
@@ -21,10 +16,10 @@ class PositionRequestHandler(webapp2.RequestHandler):
         api_key = 'prova'
         if api_key == 'prova':
             form_data = urllib.urlencode(
-                {'topic': 'scb', 'message': 'position'})
+                {'topic': topic, 'message': 'position'})
 
             response = urlfetch.fetch(
-                url='http://34.217.126.242/MqttPublish/publish.php',
+                url=url,
                 payload=form_data,
                 method=urlfetch.POST)
 
