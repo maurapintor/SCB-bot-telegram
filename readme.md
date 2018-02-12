@@ -213,7 +213,11 @@ Per questa funzionalità si può usare il protocollo [MQTT](http://www.lucadente
 Nel seguito faremo riferimento ad un bridge gratuito e messo a disposizione dall'Università di Cagliari.
 Inoltre sarà necessario utilizzare un proprio topic in modo tale che solo i nostri dispositivi lo ascoltino. 
 
-Aprire il file flash_to_boards/SCBNode.ino e inserire l'indirizzo del bridge e il topic in corrispondenza delle righe:
+Aprire il file *flash_to_boards/SCBNode.ino* e inserire l'indirizzo del bridge e il topic in corrispondenza delle righe:
+
+|File                         |
+|-----------------------------|
+|flash_to_boards/SCBNode.ino  |
 
 ```arduino
 const char* mqtt_server = "tools.lysis-iot.com";
@@ -229,9 +233,13 @@ A questo punto abbiamo configurato il dispositivo in modo tale da farlo rimanere
 
 La seconda parte riguarda la configurazione del web server, colui che effettivamente utilizzerà la parte di bridge. Ricordiamo che il bridge si occupa di tradurre una chiamata HTTP in una publish/subscribe MQTT.
 
-Ciò che dobbiamo fare è aprire il file handlers/PositionRequestHandler e modificare l'url e topic. L'url presente è relativo al servizio messo a disposizione dal dipartimento, se viene usato un altro bridge sarà necessario aggiornarlo.
+Ciò che dobbiamo fare è aprire il file *handlers/PositionRequestHandler.py* e modificare l'url e topic. L'url presente è relativo al servizio messo a disposizione dal dipartimento, se viene usato un altro bridge sarà necessario aggiornarlo.
 
 Il topic deve essere modificato in ogni caso, inserendo quello scelto al passaggio precedente.
+
+|File                                |
+|------------------------------------|
+|handlers/PositionRequestHandler.py  |
 
 ```python
 url = 'http://tools.lysis-iot.com/MqttPublish/publish.php'
