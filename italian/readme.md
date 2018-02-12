@@ -124,10 +124,10 @@ Il GPS ha anche bisogno di un'antenna. Per questo caso specifico si consiglia di
 
 Andiamo a preparare gli script necessari su Arduino e NodeMCU (contenuti nella cartella "flash_to_boards"):
 
-| Board  | Script         | Link                                                                                             |
-|:-------|:---------------|:-------------------------------------------------------------------------------------------------|
-| NodeMCU| SCBNode.ino    |[Link](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/flash_to_boards/SCBNode.ino)    |
-| Arduino| SCBArduino.ino |[Link](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/flash_to_boards/SCBArduino.ino) |
+| Board  | Script                         |
+|:-------|:-------------------------------|
+| NodeMCU| flash_to_boards/SCBNode.ino    |
+| Arduino| flash_to_boards/SCBArduino.ino |
 
 Prima di caricare gli sketch sulla board è importante inserire alcuni parametri per il setup della connettività WiFi e le chiavi per le API.
 
@@ -135,9 +135,11 @@ Prima di caricare gli sketch sulla board è importante inserire alcuni parametri
 
 Inserire nello script del NodeMCU i seguenti parametri. Fare attenzione alle lettere maiuscole e minuscole, o lo sketch non funzionerà correttamente.
 
+```arduino
 char ssid[]     = "";               // SSID della rete
 char password[] = "";               // password
 String yourProjectName = "";        // your GAE project name
+```
 
 #### Google cloud platform
 
@@ -151,35 +153,54 @@ Creazione del progetto:
 Creazione applicazione App Engine, semplicemente aprendo la shell di gcloud nel menu appengine:
 ![Creazione applicazione](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/images/app_engine.png "Create Project")
 
-
-#### Bot Telegram
+Annotare l'ID del progetto (Attenzione: potrebbe essere diverso dal nome perché gli ID sono univoci).
 
 Completati i passaggi su GCP, si passa ora a configurare il progetto del bot telegram. Sarà necessario scaricare questo repository e modificare alcuni file di configurazione.
 
 Il primo passo è quello di installare il software development kit (sdk) per Google App Engine e Python. Qui si trova il [tutorial](https://cloud.google.com/appengine/docs/standard/python/download) con i link utili e le istruzioni.
 
-Una volta effettuati i passaggi elencati, si può modificare il file:
+Bisognerà poi inserire il nome del progetto appena creato nel file presente nel repository:
 
-|File            |Link                                                                        |
-|----------------|----------------------------------------------------------------------------|
-|app.yaml        |[Link](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/app.yaml) |
+|File            |
+|----------------|
+|app.yaml        |
+
+```yaml
+application: project-name
+```
+
+
+
+Seguire poi [questo tutorial](https://cloud.google.com/appengine/docs/standard/python/getting-started/deploying-the-application) per effettuare il deploy dell'applicazione.
+
+#### Bot Telegram
 
 Adesso è il momento di creare un nuovo bot con BotFather. Alla fine di questo processo avremo la chiave API necessaria per comandare il bot.
 
 Per prima cosa cerchiamo \@BotFather su Telegram. Apriamo la conversazione e premiamo sulla scritta "avvia" o "start" in basso. Seguire le istruzioni per creare un nuovo bot.
 
-Ricordiamoci la API key, in quanto dovremo usarla in seguito.
-
-
 [Tutorial Bot Father](http://www.nigiara.it/telegram/come-aprire-i-bot-su-telegram.htm)
 
-_____
-TODO
-_____
+I passaggi principali sono:
 
-Tutorial:
+1. Cercare il profilo \@BotFather e avviare la conversazione
+2. Inviare il comando /newbot
+3. Inserire il nome per il bot
+4. Inserire username per il bot (facendolo finire con la parola chiave "bot")
+5. Prendere la API key che ci scrive BotFather
 
-[Upload gcloud](https://cloud.google.com/appengine/docs/standard/python/getting-started/deploying-the-application)
+Ricordiamoci la API key, in quanto dovremo usarla in seguito.
+
+Una volta effettuati i passaggi elencati, si può modificare il file:
+
+|File            |
+|----------------|
+|utils/token.py  |
+
+inserendo il token che ci ha dato BotFather.
+
+
+
 
 ## Richiesta posizione real-time
 
