@@ -46,11 +46,11 @@ class MainHandler(webapp2.RequestHandler):
 
                 lista_posizione_e_data.append(temp)
                 # trip_total.append(int(c))
-
                 # print lista_posizione_e_data
-                print d
+
 
         trip_total = list(set(trip_total))
+        trip_total.sort()
 
         template_values = {
             'coordinate': lista_posizione_e_data,
@@ -65,12 +65,12 @@ class TragittoHandler(webapp2.RequestHandler):
     def get(self, trip_id):
 
         sense_data = SensedData()
-        print trip_id
+        # print trip_id
         # print sense_data
 
         data = sense_data.query().fetch()
 
-        print "Data = {}".format(data[0])
+        # print "Data = {}".format(data[0])
 
         lista_posizione_e_data = []
         trip_total = []
@@ -101,6 +101,9 @@ class TragittoHandler(webapp2.RequestHandler):
                 # print lista_posizione_e_data
 
         trip_total = list(set(trip_total))
+        trip_total.sort()
+
+        # print trip_total
 
         # print lista_posizione_e_data
 
@@ -108,6 +111,22 @@ class TragittoHandler(webapp2.RequestHandler):
 
         # for i in lis2:
         #     print i
+
+        waypoint = []
+
+        print len(lista_posizione_e_data)
+
+        asde = len(lista_posizione_e_data)
+
+        if (asde > 22):
+            print "son dentro"
+            ogni = int(asde/int(22)+0.5)
+
+            print ogni
+            for i in xrange(0, asde, ogni):
+                waypoint.append(lista_posizione_e_data[i])
+                print i
+                print waypoint
 
         template_values = {
             'coordinate': lista_posizione_e_data,
