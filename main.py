@@ -18,11 +18,11 @@ class PutHandler(webapp2.RequestHandler):
     def get(self):
         for i in xrange(10):
             sense_data = SensedData()
-            sense_data.latitude = str(39.230129 + (i*0.03))
+            sense_data.latitude = str(39.230129 + (i*0.13))
             sense_data.longitude = str(9.113895 + (i*0.02))
             sense_data.speed = "speed"
             sense_data.updated_at = datetime.datetime.now()
-            sense_data.trip_id = i
+            sense_data.trip_id = -i
             print sense_data
             sense_data.put()
 

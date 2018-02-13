@@ -237,21 +237,20 @@
 
 								for (i=0; i<trip.length; i++) {
 								//inizio blocco di istruzioni
-
-								  //notare l’indice variabile
-								  document.write("<li><a href=\"../trip/"+trip[i]+"#id-3\">"+"Itinerario "+trip[i]+"</li></a>");
-
+									if (trip[i] != "-1") {
+								  	document.write("<li><a href=\"../trip/"+trip[i]+"#id-3\">"+"Itinerario "+trip[i]+"</li></a>");
+									}
 								//fine blocco di istruzioni
 								}
 								</script>
-
-
 						  </ul>
 					</div>
 					<div id="map"></div>
 					<script>
 						function initMap(){
-								var centerMap = {lat: 39.210129, lng: 9.113895};
+
+							    var locations = {{ coordinate|safe }}
+							    var centerMap = {lat: locations[0][0], lng: locations[0][1]};
 
 								var map = new google.maps.Map(document.getElementById('map'), {
 									zoom: 14,
@@ -264,8 +263,6 @@
 									map: map,
 									suppressMarkers: true
 								});
-
-								var locations = {{coordinate}}
 
 								var iconSymbol = {
 									url: 'http://www.klicktours.com//assets/admin/img/icon/car-xxl.png',
@@ -281,26 +278,6 @@
 									});
 								};
 
-								for (i = 1; i < locations.length; i++) {
-
-									var markerA = new google.maps.Marker({
-										position: ({lat: locations[i-1][0], lng: locations[i-1][1]}),
-										icon: iconSymbol,
-										title: "point A",
-										label: "A",
-										map: map
-									});
-									var markerB = new google.maps.Marker({
-										position: ({lat: locations[i][0], lng: locations[i][1]}),
-										icon: iconSymbol,
-										title: "point B",
-										label: "B",
-										map: map
-									});
-								}
-
-							//var pointA = {lat: locations[0][0], lng: locations[0][1]};
-							//var pointB = {lat: locations[locations.length][0], lng: locations[locations.length][1]};
 								x = locations.length-1;
 
 								var pointA = {lat: locations[0][0], lng: locations[0][1]};
@@ -312,7 +289,7 @@
 						}
 
 						function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
-						    var locations = {{coordinate}}
+						    var locations = {{coordinate|safe}}
 							var waypts = [];
 
 						    if(locations.length>22){
@@ -396,49 +373,7 @@
 
 							</div>
 						</div>
-<!--
-						<div class="col-lg-7 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-1 ">
 
-							&lt;!&ndash; title &ndash;&gt;
-							<div class="title">
-								<h2 class="title__title">Or drop a message</h2>
-							</div>&lt;!&ndash; End / title &ndash;&gt;
-
-							<div class="form-wrapper">
-
-								&lt;!&ndash; form-item &ndash;&gt;
-								<div class="form-item form-item&#45;&#45;half">
-									<label class="form__label">email,<span>*</span>
-									</label>
-									<input class="form-control" type="text" name="input" placeholder=""/>
-								</div>&lt;!&ndash; End / form-item &ndash;&gt;
-
-
-								&lt;!&ndash; form-item &ndash;&gt;
-								<div class="form-item form-item&#45;&#45;half">
-									<label class="form__label">Name,<span>*</span>
-									</label>
-									<input class="form-control" type="text" name="input" placeholder=""/>
-								</div>&lt;!&ndash; End / form-item &ndash;&gt;
-
-
-								&lt;!&ndash; form-item &ndash;&gt;
-								<div class="form-item">
-									<label class="form__label">message<span>*</span>
-									</label>
-									<textarea class="form-control"></textarea>
-								</div>&lt;!&ndash; End / form-item &ndash;&gt;
-
-
-								&lt;!&ndash; form-item &ndash;&gt;
-								<div class="form-item">
-									<a class="md-btn btn-custom" href="#">Send message
-									</a>
-								</div>&lt;!&ndash; End / form-item &ndash;&gt;
-
-							</div>
-						</div>
--->
 					</div>
 				</div>
 			</section>
