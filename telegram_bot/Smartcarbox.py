@@ -1,36 +1,42 @@
+import json
+
 import telegram
 from telegram.ext import Updater
 import logging
 from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler, Filters
 import paho.mqtt.client as mqtt
+from utils.token import TOKEN
+
+mqtt_bridge_url = 'http://tools.lysis-iot.com'
+topic = 'scb'
+
 
 class SmartCarBoxBot(object):
 
     def __init__(self, bot_token):
-        self.my_topic = "scb/control"
+        self.my_topic = topic
         self.bot_token = bot_token
-        self.broker = "broker.hivemq.com"
+        self.broker = mqtt_bridge_url
         self.port = 1883
-        self.client1 = mqtt.Client("control-scb")  # create client object
+        self.client1 = mqtt.Client("scb")  # create client object
 
     def button(self, bot, update):
-        if update.message.text == "Avvio Tracking":
-            bot.send_message(chat_id=update.message.chat_id, text="Tracking is Active")
-            self.start_tracking()
-        elif update.message.text == "Stop Tracking":
-            bot.send_message(chat_id=update.message.chat_id, text="Tracking Stopped")
-            self.stop_tracking()
+        if update.message.text == "Hello!":
+            bot.send_message(chat_id=update.message.chat_id, text="Hello! I'm the SCB Bot!"
+                                                                  " I know where you left your car :D")
         elif update.message.text == "Posizione":
             bot.send_message(chat_id=update.message.chat_id, text="Position is: here")
-            self.ask_position()
+            self.get_position()
         else:
             bot.send_message(chat_id=update.message.chat_id, text="Non capisco",
                              parse_mode=telegram.ParseMode.HTML)
 
     def start(self, bot, update):
-        bot.send_message(chat_id=update.message.chat_id, text="I'm a bot, please talk to me!")
-        custom_keyboard = [['Avvio Tracking', 'Stop Tracking'],
+        bot.send_message(chat_id=update.message.chat_id,
+                         text="Nice to meet you, {}".format(update.message.from_user.first_name))
+        print update.message
+        custom_keyboard = [['Hello!'],
                            ['Posizione']]
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
 
@@ -54,22 +60,10 @@ class SmartCarBoxBot(object):
 
         self.updater.start_polling()
 
-    def start_tracking(self):
-        self.publish("start")
+    def get_position(self):
+        pass
 
-    def stop_tracking(self):
-        self.publish("stop")
-
-    def ask_position(self):
-        self.publish("position")
-
-    def publish(self, message):
-        self.client1.connect(self.broker, self.port)  # establish connection
-        self.client1.publish(self.my_topic, message)  # publish
 
 if __name__ == '__main__':
-    bot_token = '502810340:AAEQKZAkwwhvA0B6Fkk5rTvlY_ERWp1Nd5k'
-    scb = SmartCarBoxBot(bot_token)
+    scb = SmartCarBoxBot(TOKEN)
     scb.run()
-
-
