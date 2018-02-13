@@ -33,7 +33,7 @@
 		<header class="header header--fixed">
 			<div class="container">
 				<div class="header__inner">
-					<div class="header__logo"><a href="index.html"><img src="/assets/img/logo.png" width="30%" alt=""/></a></div>
+					<div class="header__logo"><a href="#id-1"><img src="/assets/img/logo.png" width="40%" alt=""/></a></div>
 					<div class="header__menu">
 
 						<!-- onepage-nav -->
@@ -67,10 +67,11 @@
 				<div class="hero__wrapper">
 					<div class="container">
 						<div class="row" style="text-align: center; padding-top: 10%">
-							<img src="/assets/img/logo_tot.png" style="width: 50%; opacity: 0.75">
+							<img src="/assets/img/logo_tot.png" style="width: 75%; opacity: 1">
 						</div>
 						<div class="row">
 							<div class="col-lg-12 ">
+								<br>
 								<h1 class="hero__title">We can
 
 									<!-- typing__module -->
@@ -229,13 +230,22 @@
 				<div class="container">
 					<h2 class="title__title">Map</h2>
 					<div class="btn-group">
-					  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Apri menu<span class="caret"></span></button>
+					  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Scegli Tragitto<span class="caret"></span></button>
 						  <ul class="dropdown-menu" role="menu">
-							<li><a href="ultimotragitto">Ultimo Tragitto {{ last_trip }}</a></li>
-							<li><a href="#id-5">Penultimo Tragitto</a></li>
-							<li><a href="#">Link 3</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Link 4</a></li>
+								<script>
+								trip = {{ trip_all }}
+
+								for (i=0; i<trip.length; i++) {
+								//inizio blocco di istruzioni
+
+								  //notare l’indice variabile
+								  document.write("<li><a href=\"../trip/"+trip[i]+"#id-3\">"+"Itinerario "+trip[i]+"</li></a>");
+
+								//fine blocco di istruzioni
+								}
+								</script>
+
+
 						  </ul>
 					</div>
 					<div id="map"></div>
