@@ -114,23 +114,21 @@ class TragittoHandler(webapp2.RequestHandler):
 
         waypoint = []
 
-        print len(lista_posizione_e_data)
+        # print len(lista_posizione_e_data)
 
-        asde = len(lista_posizione_e_data)
+        if (len(lista_posizione_e_data) > 22):
+            # print "son dentro"
+            ogni = int(len(lista_posizione_e_data)/int(22)+0.5)
 
-        if (asde > 22):
-            print "son dentro"
-            ogni = int(asde/int(22)+0.5)
-
-            print ogni
-            for i in xrange(0, asde, ogni):
+            # print ogni
+            for i in xrange(0, len(lista_posizione_e_data), ogni):
                 waypoint.append(lista_posizione_e_data[i])
-                print i
-                print waypoint
+
 
         template_values = {
             'coordinate': lista_posizione_e_data,
             'trip_all': trip_total,
+            'waypoints': waypoint,
         }
 
         self.response.write(template.render("templates/home.html", template_values))

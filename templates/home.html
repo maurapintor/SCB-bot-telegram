@@ -225,7 +225,7 @@
 										position: ({lat: locations[i][0], lng: locations[i][1]}),
 										map: map,
 										icon: iconSymbol,
-										title: "original"
+										title: locations[i][2]
 									});
 								};
 
@@ -240,16 +240,14 @@
 						}
 
 						function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
-						    var locations = {{coordinate|safe}}
+						    var locations = {{ coordinate|safe }}
+
+						    var temp_wayp = {{ waypoints|safe }}
+
 							var waypts = [];
 
-						    if(locations.length>22){
-								maxfor = 22;
-							}
-							else maxfor = locations.length;
-
-							for (var i = 1; i < maxfor; i++) {
-								point = {lat: locations[i][0], lng: locations[i][1]};
+							for (var i = 1; i < waypts.length; i++) {
+								point = {lat: temp_wayp[i][0], lng: temp_wayp[i][1]};
 
 								waypts.push({
 									location: point,
