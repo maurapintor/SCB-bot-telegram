@@ -25,7 +25,6 @@ class MainHandler(webapp2.RequestHandler):
             maxtemp.append(int(c))
 
         for i in xrange(len(data)):
-
             c = data[i].trip_id
             trip_total.append(int(c))
 
@@ -51,10 +50,32 @@ class MainHandler(webapp2.RequestHandler):
 
         trip_total = list(set(trip_total))
         trip_total.sort()
+        lista_posizione_e_data = sorted(lista_posizione_e_data, key=lambda item: item[2])
+
+        waypoint = []
+
+        # print len(lista_posizione_e_data)
+
+        if (len(lista_posizione_e_data) > 22):
+            print "son dentro"
+            ogni = int(len(lista_posizione_e_data)/22.00+0.5)
+            print ogni
+
+            for i in xrange(0, len(lista_posizione_e_data), ogni):
+                waypoint.append(lista_posizione_e_data[i])
+                print i
+                print waypoint
+                print len(waypoint)
+
+        else:
+            for i in xrange(len(lista_posizione_e_data)):
+                waypoint.append(lista_posizione_e_data[i])
+
 
         template_values = {
             'coordinate': lista_posizione_e_data,
             'trip_all': trip_total,
+            'waypoints': waypoint,
         }
 
         self.response.write(template.render("templates/home.html", template_values))
@@ -80,7 +101,7 @@ class TragittoHandler(webapp2.RequestHandler):
             c = data[i].trip_id
             trip_total.append(int(c))
 
-            if (data[i].trip_id == int(trip_id)):
+            if (c == int(trip_id)):
                 # print "son dentro"
                 temp = []
                 a = data[i].latitude
@@ -117,13 +138,19 @@ class TragittoHandler(webapp2.RequestHandler):
         # print len(lista_posizione_e_data)
 
         if (len(lista_posizione_e_data) > 22):
-            # print "son dentro"
-            ogni = int(len(lista_posizione_e_data)/int(22)+0.5)
+            print "son dentro"
+            ogni = int(round(float(len(lista_posizione_e_data) /float(22.00))+0.5, 0))
+            print ogni
 
-            # print ogni
             for i in xrange(0, len(lista_posizione_e_data), ogni):
                 waypoint.append(lista_posizione_e_data[i])
+                print i
+                print waypoint
+                print len(waypoint)
 
+        # else:
+        #     for i in xrange(len(lista_posizione_e_data)):
+        #         waypoint.append(lista_posizione_e_data[i])
 
         template_values = {
             'coordinate': lista_posizione_e_data,
@@ -132,3 +159,7 @@ class TragittoHandler(webapp2.RequestHandler):
         }
 
         self.response.write(template.render("templates/home.html", template_values))
+
+
+def calculateWaypoints():
+    pass

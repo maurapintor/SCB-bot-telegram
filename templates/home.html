@@ -216,7 +216,7 @@
 								});
 
 								var iconSymbol = {
-									url: 'http://www.klicktours.com//assets/admin/img/icon/car-xxl.png',
+									url: "/assets/img/car_icon.png",
 									scaledSize: new google.maps.Size(15, 15)
 								};
 
@@ -240,13 +240,13 @@
 						}
 
 						function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
-						    var locations = {{ coordinate|safe }}
+						    var locations = {{ coordinate|safe }};
 
-						    var temp_wayp = {{ waypoints|safe }}
+						    var temp_wayp = {{ waypoints|safe }};
 
 							var waypts = [];
 
-							for (var i = 1; i < waypts.length; i++) {
+							for (var i = 1; i < temp_wayp.length; i++) {
 								point = {lat: temp_wayp[i][0], lng: temp_wayp[i][1]};
 
 								waypts.push({
