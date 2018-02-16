@@ -251,6 +251,10 @@ Abbiamo configurato il web server in modo tale da fare una chiamata HTTP verso u
 
 Risultati ottenuti:
 ![Result](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/assets/img/about/1b.jpg)
+![Design](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/assets/img/about/2.jpg)
+![Work in progress](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/assets/img/about/2b.jpg)
+![Lots of code](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/assets/img/about/3.jpg)
+![Pizza team](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/assets/img/about/3b.jpg)
 [smartcar-box.appspot.com](smartcar-box.appspot.com)
 
 
