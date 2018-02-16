@@ -37,6 +37,6 @@ app = webapp2.WSGIApplication([
     ('/webhook', WebhookHandler),
     ('/position/put', PositionHandler),
     ('/position/get', PositionRequestHandler),
-    ('/position/stop', StopHandler),
+    ('/position/stop', StopHandler)
 
 ], debug=True)
