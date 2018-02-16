@@ -6,4 +6,3 @@ from handlers.PositionRequestHandler import PositionRequestHandler
 from handlers.SetWebHookHandler import SetWebhookHandler
 from handlers.StopHandler import StopHandler
 from handlers.WebhookHandler import WebhookHandler
-

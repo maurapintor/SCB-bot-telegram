@@ -12,12 +12,12 @@ class StopHandler(webapp2.RequestHandler):
         longitude = self.request.get('longitude')
 
         logging.warning("StopHandler, key: {}".format(api_key))
-        logging.warning("StopHandler, lat {} | lon {}".format(latitude,longitude))
+        logging.warning("StopHandler, lat {} | lon {}".format(latitude, longitude))
 
         api_key = 'prova'
         if api_key == 'prova':
-            sendToAll( "Pare che il veicolo si sia fermato.")
-            sendLocationToAll(latitude,longitude)
+            sendToAll("Pare che il veicolo si sia fermato.")
+            sendLocationToAll(latitude, longitude)
 
         else:
             logging.warning(
