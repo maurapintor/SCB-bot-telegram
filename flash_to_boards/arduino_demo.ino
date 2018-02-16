@@ -116,13 +116,14 @@ void loop() {
     last_req = millis();
     sent_stop = 0;
   }
+
   else{
   if (millis()-last_req > 180000 && !sent_stop){
     sendStop();
     sent_stop = 1;
   }
   }
-  Serial.println(millis());
+  Serial.println("last_req = " + String(last_req) + "\t millis = " + String(millis()));
 //  delay(10);
 //  if (!mqttclient.connected()) {
 //    reconnect();
