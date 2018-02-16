@@ -35,7 +35,7 @@ class WebhookHandler(webapp2.RequestHandler):
                 reply(chat_id, message_id, 'Bot enabled')
                 setEnabled(chat_id, True)
             elif text == '/stop':
-                reply('Bot disabled')
+                reply(chat_id, message_id, 'Bot disabled')
                 setEnabled(chat_id, False)
 
 
@@ -71,7 +71,6 @@ class WebhookHandler(webapp2.RequestHandler):
 
 
         elif 'who are you' in text:
-            reply(
-                'telebot starter kit, created by yukuku: https://github.com/yukuku/telebot')
+            reply(chat_id, message_id, 'telebot starter kit, created by yukuku: https://github.com/yukuku/telebot')
         elif 'what time' in text:
             reply(chat_id, message_id, 'look at the corner of your screen!')
