@@ -81,7 +81,6 @@ class MainHandler(webapp2.RequestHandler):
         self.response.write(template.render("templates/home.html", template_values))
 
 
-
 class TragittoHandler(webapp2.RequestHandler):
     def get(self, trip_id):
 
