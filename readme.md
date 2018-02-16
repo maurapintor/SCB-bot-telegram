@@ -10,6 +10,7 @@ Contributori:
 
 Nota: se vuoi saltare l'introduzione e sai già come funziona il sistema, clicca [qui](#istruzioni).
 
+
 ## Funzionalità richieste dal progetto
 
 Sviluppare un sistema per il tracciamento di un veicolo tramite GPS. Il trigger per l'accensione del sistema è un accelerometro, che tramite un semplice algoritmo si accorge quando la macchina si sta spostando e invia tempestivamente un messaggio tramite Telegram al proprietario della macchina. Il sistema fa uso provvisoriamente di connettività WiFi, ma sarebbe opportuno integrare un modulo GSM per renderlo completamente autonomo.
@@ -75,9 +76,7 @@ Il team ha apportato le seguenti modifiche al funzionamento:
 
 Nella seguente sezione sono illustrati i passaggi per il montaggio fisico del sistema. Le connessioni effettuate sono illustrate nello schema seguente. Si consiglia di prenderne visione ed effettuare le connessioni nell'ordine di spiegazione del tutorial.
 
-___
-IMMAGINE
-___
+![Schematics](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/assets/img/about/1.png)
 
 #### Boards
 
@@ -248,7 +247,11 @@ topic = 'scb'
 
 Abbiamo configurato il web server in modo tale da fare una chiamata HTTP verso un servizio esterno, il quale si occupa di pubblicare sul topic MQTT desiderato. 
 
+## Bonus material
 
+Risultati ottenuti:
+![Result](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/assets/img/about/1b.jpg)
+[smartcar-box.appspot.com](smartcar-box.appspot.com)
 
 
 
