@@ -38,6 +38,5 @@ app = webapp2.WSGIApplication([
     ('/position/put', PositionHandler),
     ('/position/get', PositionRequestHandler),
     ('/position/stop', StopHandler),
-    ('/put', PutHandler),
 
 ], debug=True)
