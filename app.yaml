@@ -2,7 +2,7 @@ application: smartcar-box
 runtime: python27
 api_version: 1
 threadsafe: yes
-version: 1
+version: 2
 
 handlers:
 - url: /favicon\.ico

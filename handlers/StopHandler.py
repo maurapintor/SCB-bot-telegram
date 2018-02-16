@@ -21,5 +21,5 @@ class StopHandler(webapp2.RequestHandler):
 
         else:
             logging.warning(
-                "PositionHandler, post() method. Not allowed with this key.")
+                "StopHandler, post() method. Not allowed with this key.")
             webapp2.abort(401, detail="Not Authorized")
