@@ -30,14 +30,14 @@ class PositionHandler(webapp2.RequestHandler):
 
             sense_data = SensedData().query().order(-SensedData.trip_id).\
                 order(-SensedData.updated_at).fetch()
-            print (sense_data)
+            # print (sense_data)
             is_user = bool(int(user_requested))
             if len(sense_data) is 0:
                 trip_id = 0
                 self.put_data(latitude, longitude, speed, updated_at, trip_id,
                               user_requested)
             elif not is_user:
-                print (sense_data[0].updated_at)
+                # print (sense_data[0].updated_at)
                 last_sample = sense_data[0]
 
                 trip_id = sense_data[0].trip_id

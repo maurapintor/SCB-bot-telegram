@@ -12,10 +12,6 @@ handlers:
 - url: /assets
   static_dir: assets
 
-- url: /set_webhook
-  login: admin
-  script: main.app
-
 - url: .*
   script: main.app
 
