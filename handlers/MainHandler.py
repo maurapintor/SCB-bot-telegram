@@ -138,7 +138,7 @@ class TragittoHandler(webapp2.RequestHandler):
 
         if (len(lista_posizione_e_data) > 22):
             print "son dentro"
-            ogni = int(round(float(len(lista_posizione_e_data) /float(22.00))+0.5, 0))
+            ogni = int(len(lista_posizione_e_data) / 22.00 + 0.5)
             print ogni
 
             for i in xrange(0, len(lista_posizione_e_data), ogni):
@@ -147,9 +147,10 @@ class TragittoHandler(webapp2.RequestHandler):
                 print waypoint
                 print len(waypoint)
 
-        # else:
-        #     for i in xrange(len(lista_posizione_e_data)):
-        #         waypoint.append(lista_posizione_e_data[i])
+        else:
+            for i in xrange(len(lista_posizione_e_data)):
+                waypoint.append(lista_posizione_e_data[i])
+
 
         template_values = {
             'coordinate': lista_posizione_e_data,
