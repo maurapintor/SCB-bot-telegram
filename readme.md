@@ -255,7 +255,7 @@ Risultati ottenuti:
 ![Work in progress](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/assets/img/about/2b.jpg)
 ![Lots of code](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/assets/img/about/3.jpg)
 ![Pizza team](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/assets/img/about/3b.jpg)
-[Try our demo application](smartcar-box.appspot.com)
+[Try our demo application](http://smartcar-box.appspot.com)
 
 
 
