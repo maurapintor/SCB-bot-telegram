@@ -20,9 +20,9 @@
    Connection settings
 */
 
-char ssid[]     = "we<3pizza";    // your network SSID (name)
-char password[] = "pizzateam";    // sqwswzxaqyour network key
-String yourProjectName = "smartcar-box";
+char ssid[]     = "";    // your network SSID (name)
+char password[] = "";    // sqwswzxaqyour network key
+String yourProjectName = "";
 const char* mqtt_server = "tools.lysis-iot.com";
 const char* topic = "scb";
 
