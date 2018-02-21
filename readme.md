@@ -158,18 +158,6 @@ Completati i passaggi su GCP, si passa ora a configurare il progetto del bot tel
 
 Il primo passo è quello di installare il software development kit (sdk) per Google App Engine e Python. Qui si trova il [tutorial](https://cloud.google.com/appengine/docs/standard/python/download) con i link utili e le istruzioni.
 
-Bisognerà poi inserire il nome del progetto appena creato nel file presente nel repository:
-
-|File            |
-|----------------|
-|app.yaml        |
-
-```yaml
-application: project-name
-```
-
-
-
 Seguire poi [questo tutorial](https://cloud.google.com/appengine/docs/standard/python/getting-started/deploying-the-application) per effettuare il deploy dell'applicazione.
 
 #### Bot Telegram
