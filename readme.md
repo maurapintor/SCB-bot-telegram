@@ -149,9 +149,6 @@ Una volta effettuato l'accesso, è necessario creare un progetto su [GCP console
 Creazione del progetto: 
 ![Creazione progetto](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/images/create_project.png "Create Project")
 
-Creazione applicazione App Engine, semplicemente aprendo la shell di gcloud nel menu appengine:
-![Creazione applicazione](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/images/app_engine.png "Create Project")
-
 Annotare l'ID del progetto (Attenzione: potrebbe essere diverso dal nome perché gli ID sono univoci).
 
 Completati i passaggi su GCP, si passa ora a configurare il progetto del bot telegram. Sarà necessario scaricare questo repository e modificare alcuni file di configurazione.
