@@ -128,7 +128,7 @@ Andiamo a preparare gli script necessari su Arduino e NodeMCU (contenuti nella c
 | NodeMCU| flash_to_boards/SCBNode.ino    |
 | Arduino| flash_to_boards/SCBArduino.ino |
 
-Prima di caricare gli sketch sulla board è importante inserire alcuni parametri per il setup della connettività WiFi e le chiavi per le API.
+Prima di caricare gli sketch sulla board è importante inserire alcuni parametri per il setup della connettività WiFi e le chiavi per le API. [cosa sono le API](http://www.fastweb.it/web-e-digital/cosa-sono-le-api-e-a-cosa-servono/).  
 
 ### WiFi e parametri da personalizzare
 
