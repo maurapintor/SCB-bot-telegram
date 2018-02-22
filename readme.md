@@ -146,7 +146,7 @@ Per l'hosting del bot e del database dobbiamo utilizzare servizi Cloud. Abbiamo 
 
 Una volta effettuato l'accesso, è necessario creare un progetto su [GCP console](https://console.cloud.google.com). 
 
-In questo [video](https://youtu.be/1wj4Qr4zWuk) è possibile vedere tutti i passaggi elencati in questa sezione, ovvero come effetture la distribuzione (deploy) dell'applicazione con i servzi GCP.
+In questo [video](https://www.youtube.com/watch?v=hgGWa0NHYyM) è possibile vedere tutti i passaggi elencati in questa sezione, ovvero come effetture la distribuzione (deploy) dell'applicazione con i servzi GCP.
 
 Creazione del progetto: 
 ![Creazione progetto](https://github.com/Maupin1991/SCB-bot-telegram/blob/master/images/create_project.png "Create Project")
