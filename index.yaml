@@ -6,3 +6,4 @@ indexes:
     direction: desc
   - name: updated_at
     direction: desc
+   
