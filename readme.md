@@ -160,7 +160,7 @@ Il primo passo è quello di installare il software development kit (sdk) per Goo
 Seguire poi [questo tutorial](https://cloud.google.com/appengine/docs/standard/python/getting-started/deploying-the-application) per effettuare il deploy dell'applicazione.
 
 #### Bot Telegram
-Per questo progetto è stato scelto di implementare il bot su piattaforma la cloud, la stessa configurata nel punto precedente. A tale scopo risulta molto utile la guida fornita da [yukuku](https://github.com/yukuku/telebot), la quale è molto chiara e dettagliata.
+Per questo progetto è stato scelto di implementare il bot su piattaforma cloud, la stessa configurata nel punto precedente. A tale scopo risulta molto utile la guida fornita da [yukuku](https://github.com/yukuku/telebot), la quale è molto chiara e dettagliata.
 
 Adesso è il momento di creare un nuovo bot con BotFather. Alla fine di questo processo avremo la chiave API necessaria per comandare il bot.
 
