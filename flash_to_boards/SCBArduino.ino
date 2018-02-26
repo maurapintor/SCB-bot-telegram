@@ -21,10 +21,10 @@
 */
 
 char ssid[]     = "";    // your network SSID (name)
-char password[] = "";    // sqwswzxaqyour network key
-String yourProjectName = "smartcar-box";
-const char* mqtt_server = "tools.lysis-iot.com";
-const char* topic = "scb";
+char password[] = "";    // network key
+String yourProjectName = "";
+const char* mqtt_server = "tools.lysis-iot.com"; // you can use this one if you want, it should work
+const char* topic = "";
 
 //---------------------------------------------------------------------------------//
 
