@@ -10,6 +10,11 @@ from utils.telegramMsg import reply, sendToAll
 
 
 class WebhookHandler(webapp2.RequestHandler):
+    """
+    In questo metodo vengono analizzate le stringhe
+    contenute all'interno del messaggio.
+
+    """
     def post(self):
         urlfetch.set_default_fetch_deadline(60)
         body = json.loads(self.request.body)
@@ -30,15 +35,17 @@ class WebhookHandler(webapp2.RequestHandler):
         if not text:
             logging.info('no text')
             return
+        # si controlla se il messaggio inizia con /
         if text.startswith('/'):
+            # verifica della parola segreta
             if text == '/mais3cr3tpa55u0rd':
                 reply(chat_id, message_id, 'Bot enabled')
                 setEnabled(chat_id, True)
+            # disabilitazione del bot
             elif text == '/stop':
                 reply(chat_id, message_id, 'Bot disabled')
                 setEnabled(chat_id, False)
-
-
+            # verifico se la chat e' abilitata a comandare il bot
             elif getEnabled(chat_id):
                 if text.lower() == '/test':
                     sendToAll()
@@ -47,10 +54,10 @@ class WebhookHandler(webapp2.RequestHandler):
 
                     # mqtt request
                     # datastore write
-
                     response = mqtt_publish()
                     memcache.add(key='chat_id', value=chat_id, time=3600)
 
+                    # result potrebbe essere il risultato di una chiamata HTTP
                     result = 200
 
                     if result == 200:
@@ -59,9 +66,6 @@ class WebhookHandler(webapp2.RequestHandler):
 
                     else:
                         reply(chat_id, message_id, 'Qualcosa went wrong!')
-
-                elif text == '/Spegni':
-                    pass
 
                 else:
                     reply(chat_id, message_id, 'Non ti capisco, mi dispiace.')
