@@ -52,8 +52,6 @@ class WebhookHandler(webapp2.RequestHandler):
 
                 elif text.lower() == '/position':
 
-                    # mqtt request
-                    # datastore write
                     response = mqtt_publish()
                     memcache.add(key='chat_id', value=chat_id, time=3600)
 
